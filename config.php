@@ -1,6 +1,6 @@
 <?php
 
 define("HOST", "localhost");
-define("BASE", "loja");
+define("BASE", "sistema_academico");
 define("USER", "root");
 define("PASS", "");
