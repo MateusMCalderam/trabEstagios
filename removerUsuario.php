@@ -3,5 +3,5 @@
 require_once("config.php");
 require_once("vendor/autoload.php");
 
-$controller = new Controller\LoginController();
-$controller->login();
+$controller = new Controller\UserController();
+$controller->remove();

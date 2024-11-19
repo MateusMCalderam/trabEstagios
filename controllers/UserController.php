@@ -36,7 +36,7 @@ final class UserController extends Controller
         $id = $_POST['id'];
         $model = new UserModel();
 
-        $vo = new UserVO($id, $_POST['login'], $_POST['senha'], );
+        $vo = new UserVO($id, $_POST['login'], $_POST['senha'], $_POST["nivel"]);
         
         if(empty($id)){
             $result = $model->insert($vo);
