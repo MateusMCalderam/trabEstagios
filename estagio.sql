@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05-Nov-2024 às 00:42
+-- Tempo de geração: 21-Nov-2024 às 14:13
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -134,7 +134,8 @@ CREATE TABLE `representanteempresa` (
   `id` int(11) NOT NULL,
   `funcao` varchar(255) DEFAULT NULL,
   `cpf` varchar(15) NOT NULL,
-  `rg` varchar(9) NOT NULL
+  `rg` varchar(9) NOT NULL,
+  `nome` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -149,6 +150,13 @@ CREATE TABLE `usuarios` (
   `senha` varchar(255) NOT NULL,
   `nivel` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `login`, `senha`, `nivel`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 2);
 
 --
 -- Índices para tabelas despejadas
@@ -258,7 +266,7 @@ ALTER TABLE `representanteempresa`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restrições para despejos de tabelas
