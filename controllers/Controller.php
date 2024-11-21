@@ -9,7 +9,7 @@ abstract class Controller {
 
         if($obrigaLogin) {
             if(!isset($_SESSION["usuario"])) {
-                $this->redirect("login.php");
+                $this->redirect("./login");
                 exit;
             }
         }        

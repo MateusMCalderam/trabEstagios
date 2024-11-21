@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Lista de Usuários</h1>
-    <a href="./usuario.php">Cadastrar Usuário</a>
+    <a href="./usuarios/form">Cadastrar Usuário</a>
     <table border="1">
         <thead>
             <tr>
@@ -25,9 +25,9 @@
                     <td><?php echo $usuario->getLogin(); ?></td>
                     <td><?php echo $usuario->getNivel(); ?></td>
                     <td>
-                        <a href="usuario.php?id=<?= $usuario->getId(); ?>" class="edit">Editar</a>
+                        <a href="./usuarios/form?id=<?= $usuario->getId(); ?>" class="edit">Editar</a>
                         <br>
-                        <a href="removerUsuario.php?id=<?= $usuario->getId(); ?>" class="remove">Excluir</a>
+                        <a href="./usuarios/remove?id=<?= $usuario->getId(); ?>" class="remove">Excluir</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

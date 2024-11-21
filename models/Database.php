@@ -1,7 +1,9 @@
 <?php
 
+
 namespace Model;
 
+require_once 'config.php';
 use \PDO;
 
 final class Database {

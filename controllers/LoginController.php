@@ -16,20 +16,22 @@ final class LoginController extends Controller {
     }
 
     public function fazerLogin(){
-        $vo = new UserVO(0, $_POST['login'], $_POST['senha'], $_POST['nivel']);
+        $vo = new UserVO(0, $_POST['login'], $_POST['senha']);
         $model = new UserModel();
         $result = $model->doLogin($vo);
-
-
-        if(empty($result)){
-            $this->redirect("login.php");
-        }else {
-            $this->redirect("usuarios.php");
+    
+        if (empty($result)) {
+            header("Location: ./login"); 
+            exit();
+        } else {
+            header("Location: ./usuarios"); 
+            exit();
         }
     }
-
+    
+    
     public function logout() {
         session_destroy();
-        $this->redirect("index.php");
+        header("Location: ./"); 
     }
 }

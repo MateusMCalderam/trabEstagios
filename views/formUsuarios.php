@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Formulário Usuário</h1>
-    <form action="salvarUsuario.php" method="POST">
+    <form action="./save" method="POST">
         <input type="hidden" name="id" value="<?php echo $usuario->getId(); ?>">
         <input type="text" name="login" value="<?php echo $usuario->getLogin(); ?>" placeholder="Insira o login do usuário:">
         <input type="password" name="senha" placeholder="Insira a senha do novo usuário:">

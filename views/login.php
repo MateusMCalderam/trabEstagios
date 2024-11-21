@@ -6,7 +6,7 @@
     <title>Sistema Estágio</title>
 </head>
 <body>
-    <form action="./fazerLogin.php" method="POST">
+    <form action="./login" method="POST">
         <input type="text" name="login">
         <br>
         <input type="password" name="senha">
