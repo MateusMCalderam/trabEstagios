@@ -44,12 +44,12 @@ final class UserController extends Controller
             $result = $model->update($vo);
         }
 
-        $this->redirect("./");
+        $this->redirect("../usuarios");
     }
-
+    
     public function remove() {
         $model = new UserModel();
         $model->delete(new UserVO($_GET['id']));
-        $this->redirect("./");
+        $this->redirect("../usuarios");
     }
 }
