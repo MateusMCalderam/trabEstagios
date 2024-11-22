@@ -8,7 +8,7 @@ final class EstagioVO extends VO {
     private $area;
     private $cargaHoraria;
     private $idEstudante;
-    private $idCoordenador;
+    private $idOrientador;
     private $idEmpresa;
     private $idRepresentanteEmpresa;
     private $idCidade;
@@ -25,7 +25,7 @@ final class EstagioVO extends VO {
     private $autoavaliacao;
     private $termoCompromisso;
 
-    public function __construct($id = 0, $periodo = "", $area = "", $cargaHoraria = '',$idEstudante = 0 , $idCoordenador = 0 , 
+    public function __construct($id = 0, $periodo = "", $area = "", $cargaHoraria = '',$idEstudante = 0 , $idOrientador = 0 , 
     $idEmpresa = '' , $idRepresentanteEmpresa = 0 , $idCidade = '', $idCoorientador = '', $nomeSupervisor = '', $cargoSupervisor = '', 
     $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $encaminhamentos = '', $planoAtividades = '', $relatorioFinal = '', 
     $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '') {
@@ -34,7 +34,7 @@ final class EstagioVO extends VO {
         $this->area = $area;
         $this->cargaHoraria = $cargaHoraria;
         $this->idEstudante = $idEstudante;
-        $this->idCoordenador = $idCoordenador;
+        $this->idOrientador = $idOrientador;
         $this->idEmpresa = $idEmpresa;
         $this->idRepresentanteEmpresa = $idRepresentanteEmpresa;
         $this->idCidade = $idCidade;
@@ -82,12 +82,12 @@ final class EstagioVO extends VO {
     public function setIdEstudante($idEstudante) {
         $this->idEstudante = $idEstudante;
     }
-    public function getIdCoordenador() {
-        return $this->idCoordenador;
+    public function getIdOrientador() {
+        return $this->idOrientador;
     }
 
-    public function setIdCoordenador($idCoordenador) {
-        $this->idCoordenador = $idCoordenador;
+    public function setIdOrientador($idOrientador) {
+        $this->idOrientador = $idOrientador;
     }
     public function getIdEmpresa() {
         return $this->idEmpresa;
