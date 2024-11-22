@@ -11,9 +11,10 @@ final class EstudanteVO extends VO {
     private $rg;
     private $cidade;
     private $telefone;
+    private $endereco;
     private $email;
 
-    public function __construct($id = 0, $nome = "", $matricula = "", $curso = '',$cpf = 0 , $rg = 0 , $cidade = '' , $telefone = 0 , $email = '') {
+    public function __construct($id = 0, $nome = "", $matricula = "", $curso = '',$cpf = 0 , $rg = 0 , $cidade = '' , $telefone = 0 ,  $endereco = '',  $email = '') {
         parent::__construct($id);
         $this->nome = $nome;
         $this->matricula = $matricula;
@@ -22,6 +23,7 @@ final class EstudanteVO extends VO {
         $this->rg = $rg;
         $this->cidade = $cidade;
         $this->telefone = $telefone;
+        $this->endereco = $endereco;
         $this->email = $email;
     }
 
@@ -75,6 +77,13 @@ final class EstudanteVO extends VO {
 
     public function setTelefone($telefone) {
         $this->telefone = $telefone;
+    }
+    public function getEndereco() {
+        return $this->endereco;
+    }
+
+    public function setEndereco($endereco) {
+        $this->endereco = $endereco;
     }
     public function getEmail() {
         return $this->email;
