@@ -12,8 +12,13 @@ final class EmpresaVO extends VO {
     private $numConvenio;
     private $telefone;
     private $email;
+    private $cpfRepresentante;
+    private $rgRepresentante;
+    private $funcaoRepresentante;
+    
 
-    public function __construct($id = 0, $nome = "", $supervisor = "", $endereco = '',$cnpj = 0 , $representante = 0 , $numConvenio = '' , $telefone = 0 , $email = '') {
+    public function __construct($id = 0, $nome = "", $supervisor = "", $endereco = '',$cnpj = 0 , $representante = 0 , 
+    $numConvenio = '' , $telefone = 0 , $email = '', $cpfRepresentante = '', $rgRepresentante = '', $funcaoRepresentante = '') {
         parent::__construct($id);
         $this->nome = $nome;
         $this->supervisor = $supervisor;
@@ -23,6 +28,9 @@ final class EmpresaVO extends VO {
         $this->numConvenio = $numConvenio;
         $this->telefone = $telefone;
         $this->email = $email;
+        $this->cpfRepresentante = $cpfRepresentante;
+        $this->rgRepresentante = $rgRepresentante;
+        $this->funcaoRepresentante = $funcaoRepresentante;
     }
 
     public function getNome() {
@@ -82,5 +90,26 @@ final class EmpresaVO extends VO {
 
     public function setEmail($email) {
         $this->email = $email;
+    }
+    public function getCpfRepresentante() {
+        return $this->cpfRepresentante;
+    }
+
+    public function setCpfRepresentante($cpfRepresentante) {
+        $this->cpfRepresentante = $cpfRepresentante;
+    }
+    public function getRgRepresentante() {
+        return $this->rgRepresentante;
+    }
+
+    public function setRgRepresentante($rgRepresentante) {
+        $this->rgRepresentante = $rgRepresentante;
+    }
+    public function getFuncaoRepresentante() {
+        return $this->funcaoRepresentante;
+    }
+
+    public function setFuncaoRepresentante($funcaoRepresentante) {
+        $this->funcaoRepresentante = $funcaoRepresentante;
     }
 }
