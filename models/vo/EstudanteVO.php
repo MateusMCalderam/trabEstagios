@@ -6,22 +6,22 @@ final class EstudanteVO extends VO {
 
     private $nome;
     private $matricula;
-    private $curso;
+    private $idCurso;
     private $cpf;
     private $rg;
-    private $cidade;
+    private $idCidade;
     private $telefone;
     private $endereco;
     private $email;
 
-    public function __construct($id = 0, $nome = "", $matricula = "", $curso = '',$cpf = 0 , $rg = 0 , $cidade = '' , $telefone = 0 ,  $endereco = '',  $email = '') {
+    public function __construct($id = 0, $nome = "", $matricula = "", $idCurso = 0,$cpf = 0 , $rg = 0 , $idCidade = '' , $telefone = 0 ,  $endereco = '',  $email = '') {
         parent::__construct($id);
         $this->nome = $nome;
         $this->matricula = $matricula;
-        $this->curso = $curso;
+        $this->idCurso = $idCurso;
         $this->cpf = $cpf;
         $this->rg = $rg;
-        $this->cidade = $cidade;
+        $this->idCidade = $idCidade;
         $this->telefone = $telefone;
         $this->endereco = $endereco;
         $this->email = $email;
@@ -43,12 +43,12 @@ final class EstudanteVO extends VO {
         $this->matricula = $matricula;
     }
 
-    public function getCurso() {
-        return $this->curso;
+    public function getIdCurso() {
+        return $this->idCurso;
     }
 
-    public function setCurso($curso) {
-        $this->curso = $curso;
+    public function setIdCurso($idCurso) {
+        $this->idCurso = $idCurso;
     }
     public function getCpf() {
         return $this->cpf;
@@ -64,12 +64,12 @@ final class EstudanteVO extends VO {
     public function setRg($rg) {
         $this->rg = $rg;
     }
-    public function getCidade() {
-        return $this->cidade;
+    public function getIdCidade() {
+        return $this->idCidade;
     }
 
-    public function setCidade($cidade) {
-        $this->cidade = $cidade;
+    public function setIdCidade($idCidade) {
+        $this->idCidade = $idCidade;
     }
     public function getTelefone() {
         return $this->telefone;
