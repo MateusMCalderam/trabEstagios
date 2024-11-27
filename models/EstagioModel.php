@@ -15,7 +15,7 @@ final class EstagioModel extends Model {
 
         foreach($data as $row) {
             $vo = new EstagioVO($row["id"], $row["periodo"], $row["area"], $row["cargaHoraria"], $row["idEstudante"], 
-            $row["idOrientador"], $row["idEmpresa"], $row["idRepresentanteEmpresa"], $row["idCidade"], $row["idCoorientador"], 
+            $row["idOrientador"], $row["idEmpresa"], $row["representante"], $row["idCidade"], $row["idCoorientador"], 
             $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"], 
             $row["tipoProcesso"], $row["encaminhamentos"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"], 
             $row["autoavaliacao"], $row["termoCompromisso"]);
@@ -32,7 +32,7 @@ final class EstagioModel extends Model {
         $data = $db->select($query, $binds);
 
         return new EstagioVO($data[0]["id"], $data[0]["periodo"], $data[0]["area"], $data[0]["cargaHoraria"], 
-        $data[0]["idEstudante"], $data[0]["idOrientador"], $data[0]["idEmpresa"], $data[0]["idRepresentanteEmpresa"], $data[0]["idCidade"], 
+        $data[0]["idEstudante"], $data[0]["idOrientador"], $data[0]["idEmpresa"], $data[0]["representante"], $data[0]["idCidade"], 
         $row["idCoorientador"], $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], 
         $row["emailSupervisor"], $row["tipoProcesso"], $row["encaminhamentos"], $row["planoAtividades"], 
         $row["relatorioFinal"], $row["autoavaliacaoEmpresa"], $row["autoavaliacao"], $row["termoCompromisso"]);
@@ -41,10 +41,10 @@ final class EstagioModel extends Model {
     public function insert($vo) {
         $db = new Database();
 
-        $query = "INSERT INTO estagio (periodo, area, cargaHoraria, idEstudante, rg, idEmpresa, idRepresentanteEmpresa, 
+        $query = "INSERT INTO estagio (periodo, area, cargaHoraria, idEstudante, rg, idEmpresa, representante, 
         idCidade, idCoorientador, nomeSupervisor, cargoSupervisor, telefoneSupervisor, emailSupervisor, tipoProcesso, 
         encaminhamentos, planoAtividades, relatorioFinal, autoavaliacaoEmpresa, autoavaliacao, termoCompromisso) VALUES 
-        (:periodo, :area, :cargaHoraria, :idEstudante, :idOrientador, :idEmpresa, :idRepresentanteEmpresa, :idCidade, 
+        (:periodo, :area, :cargaHoraria, :idEstudante, :idOrientador, :idEmpresa, :representante, :idCidade, 
         :idCoorientador, :nomeSupervisor, :cargoSupervisor, :telefoneSupervisor, :emailSupervisor, :tipoProcesso, 
         :encaminhamentos, :planoAtividades, :relatorioFinal, :autoavaliacaoEmpresa, :autoavaliacao, :termoCompromisso)";
         $binds = [
@@ -54,7 +54,7 @@ final class EstagioModel extends Model {
             ":idEstudante" => $vo->getIdEstudante(),
             ":idOrientador" => $vo->getIdOrientador(),
             ":idEmpresa" => $vo->getIdEmpresa(),
-            ":idRepresentanteEmpresa" => $vo->getIdRepresentanteEmpresa(),
+            ":representante" => $vo->getRepresentante(),
             ":idCidade" => $vo->getIdCidade(),
             ":idCoorientador" => $vo->getIdCoorientador(),
             ":nomeSupervisor" => $vo->getNomeSupervisor(),
@@ -78,7 +78,7 @@ final class EstagioModel extends Model {
         $db = new Database();
 
         $query = "UPDATE estagio SET periodo = :periodo, area = :area, cargaHoraria = :cargaHoraria, idEstudante = :idEstudante, idOrientador = :idOrientador, 
-        idEmpresa = :idEmpresa, idRepresentanteEmpresa = :idRepresentanteEmpresa, idCidade = :idCidade, 
+        idEmpresa = :idEmpresa, representante = :representante, idCidade = :idCidade, 
         idCoorientador = :idCoorientador, nomeSupervisor = :nomeSupervisor, cargoSupervisor = :cargoSupervisor, 
         telefoneSupervisor = :telefoneSupervisor, emailSupervisor = :emailSupervisor, 
         tipoProcesso = :tipoProcesso, encaminhamentos = :encaminhamentos, planoAtividades = :planoAtividades, 
@@ -90,7 +90,7 @@ final class EstagioModel extends Model {
             ":idEstudante" => $vo->getIdEstudante(),
             ":idOrientador" => $vo->getIdOrientador(),
             ":idEmpresa" => $vo->getIdEmpresa(),
-            ":idRepresentanteEmpresa" => $vo->getIdRepresentanteEmpresa(),
+            ":representante" => $vo->getRepresentante(),
             ":idCidade" => $vo->getIdCidade(),
             ":idCoorientador" => $vo->getIdCoorientador(),
             ":nomeSupervisor" => $vo->getNomeSupervisor(),

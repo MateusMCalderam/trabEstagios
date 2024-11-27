@@ -10,7 +10,7 @@ final class EstagioVO extends VO {
     private $idEstudante;
     private $idOrientador;
     private $idEmpresa;
-    private $idRepresentanteEmpresa;
+    private $representante;
     private $idCidade;
     private $idCoorientador;
     private $nomeSupervisor;
@@ -26,7 +26,7 @@ final class EstagioVO extends VO {
     private $termoCompromisso;
 
     public function __construct($id = 0, $periodo = "", $area = "", $cargaHoraria = '',$idEstudante = 0 , $idOrientador = 0 , 
-    $idEmpresa = '' , $idRepresentanteEmpresa = 0 , $idCidade = '', $idCoorientador = '', $nomeSupervisor = '', $cargoSupervisor = '', 
+    $idEmpresa = '' , $representante = '' , $idCidade = '', $idCoorientador = '', $nomeSupervisor = '', $cargoSupervisor = '', 
     $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $encaminhamentos = '', $planoAtividades = '', $relatorioFinal = '', 
     $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '') {
         parent::__construct($id);
@@ -36,7 +36,7 @@ final class EstagioVO extends VO {
         $this->idEstudante = $idEstudante;
         $this->idOrientador = $idOrientador;
         $this->idEmpresa = $idEmpresa;
-        $this->idRepresentanteEmpresa = $idRepresentanteEmpresa;
+        $this->representante = $representante;
         $this->idCidade = $idCidade;
         $this->idCoorientador = $idCoorientador;
         $this->nomeSupervisor = $nomeSupervisor;
@@ -96,12 +96,12 @@ final class EstagioVO extends VO {
     public function setIdEmpresa($idEmpresa) {
         $this->idEmpresa = $idEmpresa;
     }
-    public function getIdRepresentanteEmpresa() {
-        return $this->idRepresentanteEmpresa;
+    public function getRepresentante() {
+        return $this->representante;
     }
 
-    public function setIdRepresentanteEmpresa($idRepresentanteEmpresa) {
-        $this->idRepresentanteEmpresa = $idRepresentanteEmpresa;
+    public function setRepresentante($representante) {
+        $this->representante = $representante;
     }
     public function getIdCidade() {
         return $this->idCidade;
