@@ -15,7 +15,7 @@ final class EmpresaModel extends Model {
 
         foreach($data as $row) {
             $vo = new EmpresaVO($row["id"], $row["nome"], $row["supervisor"], $row["endereco"], $row["cnpj"], $row["representante"], 
-            $row["numConvenio"], $row["telefone"], $row["email"]);
+            $row["numConvenio"], $row["telefone"], $row["email"], $row["cpfRepresentante"], $row["rgRepresentante"], $row["funcaoRepresentante"]);
             array_push($arrayDados, $vo);
         }
 
@@ -29,14 +29,14 @@ final class EmpresaModel extends Model {
         $data = $db->select($query, $binds);
 
         return new EmpresaVO($data[0]["id"], $data[0]["nome"], $data[0]["supervisor"], $data[0]["endereco"], $data[0]["cnpj"], 
-        $data[0]["representante"], $data[0]["numConvenio"], $data[0]["telefone"], $data[0]["email"]);
+        $data[0]["representante"], $data[0]["numConvenio"], $data[0]["telefone"], $data[0]["email"], $data[0]["cpfRepresentante"], $data[0]["rgRepresentante"], $data[0]["funcaoRepresentante"]);
     }
 
     public function insert($vo) {
         $db = new Database();
 
-        $query = "INSERT INTO empresa (nome, supervisor, endereco, cnpj, representante, numConvenio, telefone, email) VALUES 
-        (:nome, :supervisor, :endereco, :cnpj, :representante, :numConvenio, :telefone, :email)";
+        $query = "INSERT INTO empresa (nome, supervisor, endereco, cnpj, representante, numConvenio, telefone, email, cpfRepresentante, rgRepresentante, rgRepresentante) VALUES 
+        (:nome, :supervisor, :endereco, :cnpj, :representante, :numConvenio, :telefone, :email, :cpfRepresentante, :rgRepresentante, :funcaoRepresentante)";
         $binds = [
             ":nome" => $vo->getNome(),
             ":supervisor" => $vo->getSupervisor(),
@@ -46,6 +46,9 @@ final class EmpresaModel extends Model {
             ":numConvenio" => $vo->getNumConvenio(),
             ":telefone" => $vo->getTelefone(),
             ":email" => $vo->getEmail(),
+            ":cpfRepresentante" => $vo->getCpfRepresentante(),
+            ":rgRepresentante" => $vo->getRgRepresentante(),
+            ":funcaoRepresentante" => $vo->getFuncaoRepresentante(),
         ];
     
 
@@ -56,7 +59,8 @@ final class EmpresaModel extends Model {
         $db = new Database();
 
         $query = "UPDATE empresa SET nome = :nome, supervisor = :supervisor, endereco = :endereco, cnpj = :cnpj, representante = :representante, 
-        numConvenio = :numConvenio, telefone = :telefone, email = :email WHERE id = :id";
+        numConvenio = :numConvenio, telefone = :telefone, email = :email, cpfRepresentante = :cpfRepresentante, 
+        rgRpresentante = :rgRepresentante, funcaoRepresentante = :funcaoRepresentante WHERE id = :id";
         $binds = [
             ":nome" => $vo->getNome(),
             ":supervisor" => $vo->getSupervisor(),
@@ -66,6 +70,9 @@ final class EmpresaModel extends Model {
             ":numConvenio" => $vo->getNumConvenio(),
             ":telefone" => $vo->getTelefone(),
             ":email" => $vo->getEmail(),
+            ":cpfRepresentante" => $vo->getCpfRepresentante(),
+            ":rgRepresentante" => $vo->getRgRepresentante(),
+            ":funcaoRepresentante" => $vo->getFuncaoRepresentante(),
             ":id" => $vo->getId()
         ];
         
