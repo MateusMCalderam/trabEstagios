@@ -11,7 +11,7 @@ final class CidadeController extends Controller {
         $model = new CidadeModel();
         $data = $model->selectAll(new CidadeVO());
 
-        $this->loadView("listcidade", [
+        $this->loadView("listCidade", [
             "cidades" => $data
         ]);
     }
@@ -26,7 +26,7 @@ final class CidadeController extends Controller {
             $vo = $model->selectOne(new CidadeVO($id));
         }
         
-        $this->loadView("formcidade", [
+        $this->loadView("formCidade", [
             "cidade" => $vo
         ]);
     }
