@@ -38,7 +38,8 @@ final class CursoController extends Controller {
         $vo = new CursoVO(
             $id, 
             $_POST['nome'], 
-            $_POST['cep'], 
+            $_POST['idOrientador'],
+            $_POST['emailOrientador'], 
         );
                 
         if(empty($id)){

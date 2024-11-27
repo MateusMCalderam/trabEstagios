@@ -5,7 +5,6 @@ namespace Model\VO;
 final class EmpresaVO extends VO {
 
     private $nome;
-    private $supervisor;
     private $endereco;
     private $cnpj;
     private $representante;
@@ -17,11 +16,10 @@ final class EmpresaVO extends VO {
     private $funcaoRepresentante;
     
 
-    public function __construct($id = 0, $nome = "", $supervisor = "", $endereco = '',$cnpj = 0 , $representante = 0 , 
+    public function __construct($id = 0, $nome = "", $endereco = '',$cnpj = 0 , $representante = 0 , 
     $numConvenio = '' , $telefone = 0 , $email = '', $cpfRepresentante = '', $rgRepresentante = '', $funcaoRepresentante = '') {
         parent::__construct($id);
         $this->nome = $nome;
-        $this->supervisor = $supervisor;
         $this->endereco = $endereco;
         $this->cnpj = $cnpj;
         $this->representante = $representante;
@@ -39,14 +37,6 @@ final class EmpresaVO extends VO {
 
     public function setNome($nome) {
         $this->nome = $nome;
-    }
-
-    public function getSupervisor() {
-        return $this->supervisor;
-    }
-
-    public function setSupervisor($supervisor) {
-        $this->supervisor = $supervisor;
     }
 
     public function getEndereco() {
