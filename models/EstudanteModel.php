@@ -17,12 +17,12 @@ final class EstudanteModel extends Model {
             $vo = new EstudanteVO(
                 $row["id"],
                 $row["nome"],
-                $row["matricula"],
-                $row["curso"],
+                $row["matricula"], 
+                $row["idCurso"],
                 $row["cpf"],
                 $row["rg"],
-                $row["cidade"],
-                $row["telefone"],
+                $row["idCidade"],
+                $row["telefone"], 
                 $row["endereco"],
                 $row["email"]
             );
@@ -42,10 +42,10 @@ final class EstudanteModel extends Model {
             $data[0]["id"],
             $data[0]["nome"],
             $data[0]["matricula"],
-            $data[0]["curso"],
+            $data[0]["idCurso"],
             $data[0]["cpf"],
             $data[0]["rg"],
-            $data[0]["cidade"],
+            $data[0]["idCidade"],
             $data[0]["telefone"],
             $data[0]["endereco"],
             $data[0]["email"]
@@ -54,16 +54,16 @@ final class EstudanteModel extends Model {
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO estudante (nome, matricula, curso, cpf, rg, endereco, cidade, telefone, email) 
-                  VALUES (:nome, :matricula, :curso, :cpf, :rg, :endereco, :cidade, :telefone, :email)";
+        $query = "INSERT INTO estudante (nome, matricula, idCurso, cpf, rg, endereco, idCidade, telefone, email) 
+                  VALUES (:nome, :matricula, :idCurso, :cpf, :rg, :endereco, :idCidade, :telefone, :email)";
         $binds = [
             ":nome" => $vo->getNome(),
             ":matricula" => $vo->getMatricula(),
-            ":curso" => $vo->getCurso(),
+            ":idCurso" => $vo->getIdCurso(),
             ":cpf" => $vo->getCpf(),
             ":rg" => $vo->getRg(),
             ":endereco" => $vo->getEndereco(),
-            ":cidade" => $vo->getCidade(),
+            ":idCidade" => $vo->getIdCidade(),
             ":telefone" => $vo->getTelefone(),
             ":email" => $vo->getEmail(),
         ];
@@ -74,16 +74,16 @@ final class EstudanteModel extends Model {
     public function update($vo) {
         $db = new Database();
         $query = "UPDATE estudante 
-                  SET nome = :nome, matricula = :matricula, curso = :curso, cpf = :cpf, rg = :rg, endereco = :endereco, cidade = :cidade, telefone = :telefone, email = :email 
+                  SET nome = :nome, matricula = :matricula, idCurso = :idCurso, cpf = :cpf, rg = :rg, endereco = :endereco, idCidade = :idCidade, telefone = :telefone, email = :email 
                   WHERE id = :id";
         $binds = [
             ":nome" => $vo->getNome(),
             ":matricula" => $vo->getMatricula(),
-            ":curso" => $vo->getCurso(),
+            ":idCurso" => $vo->getIdCurso(),
             ":cpf" => $vo->getCpf(),
             ":rg" => $vo->getRg(),
             ":endereco" => $vo->getEndereco(),
-            ":cidade" => $vo->getCidade(),
+            ":idCidade" => $vo->getIdCidade(),
             ":telefone" => $vo->getTelefone(),
             ":email" => $vo->getEmail(),
             ":id" => $vo->getId(),
