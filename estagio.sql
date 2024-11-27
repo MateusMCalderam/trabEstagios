@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21-Nov-2024 às 14:13
+-- Tempo de geração: 27-Nov-2024 às 14:34
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -36,25 +36,14 @@ CREATE TABLE `cidade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `coordenador`
+-- Estrutura da tabela `curso`
 --
 
-CREATE TABLE `coordenador` (
-  `nome` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `coorientador`
---
-
-CREATE TABLE `coorientador` (
+CREATE TABLE `curso` (
   `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+  `idOrientador` int(11) DEFAULT NULL,
+  `emailOrientador` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -64,15 +53,17 @@ CREATE TABLE `coorientador` (
 --
 
 CREATE TABLE `empresa` (
+  `id` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `supervisor` varchar(255) DEFAULT NULL,
   `endereco` varchar(255) DEFAULT NULL,
   `telefone` int(11) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `cnpj` int(11) NOT NULL,
-  `representante` varchar(255) DEFAULT NULL,
-  `numConvenio` int(11) DEFAULT NULL,
-  `id` int(11) NOT NULL
+  `representante` varchar(255) NOT NULL,
+  `funcaoRepresentante` varchar(255) DEFAULT NULL,
+  `cpfRepresentante` varchar(20) DEFAULT NULL,
+  `rgRepresentante` varchar(20) DEFAULT NULL,
+  `numConvenio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -87,17 +78,17 @@ CREATE TABLE `estagio` (
   `area` varchar(255) DEFAULT NULL,
   `cargaHoraria` int(11) NOT NULL,
   `idEstudante` int(11) NOT NULL,
-  `idCoordenador` int(11) NOT NULL,
   `idEmpresa` int(11) NOT NULL,
   `nomeSupervisor` varchar(255) DEFAULT NULL,
   `cargoSupervisor` varchar(255) DEFAULT NULL,
   `telefoneSupervisor` varchar(20) DEFAULT NULL,
   `emailSupervisor` varchar(255) DEFAULT NULL,
-  `idRepresentanteempresa` int(11) NOT NULL,
+  `representante` varchar(255) NOT NULL,
   `idCidade` int(11) NOT NULL,
-  `idCoorientador` int(11) DEFAULT NULL,
+  `idCoorientador` int(11) NOT NULL,
+  `idOrientador` int(11) NOT NULL,
   `tipoProcesso` varchar(255) DEFAULT NULL,
-  `encaminhamentos` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `planoAtividades` varchar(255) DEFAULT NULL,
   `relatorioFinal` varchar(255) DEFAULT NULL,
   `autoavaliacaoEmpresa` varchar(255) DEFAULT NULL,
@@ -112,51 +103,43 @@ CREATE TABLE `estagio` (
 --
 
 CREATE TABLE `estudante` (
+  `id` int(11) NOT NULL,
   `matricula` int(11) NOT NULL,
   `nome` varchar(255) NOT NULL,
-  `curso` varchar(255) NOT NULL,
-  `cpf` int(11) NOT NULL,
-  `rg` int(11) NOT NULL,
+  `cpf` varchar(20) NOT NULL,
+  `rg` varchar(20) NOT NULL,
   `endereco` varchar(255) DEFAULT NULL,
-  `cidade` varchar(255) NOT NULL,
   `telefone` int(11) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
+  `idCurso` int(11) NOT NULL,
+  `idCidade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `representanteempresa`
+-- Estrutura da tabela `professor`
 --
 
-CREATE TABLE `representanteempresa` (
+CREATE TABLE `professor` (
   `id` int(11) NOT NULL,
-  `funcao` varchar(255) DEFAULT NULL,
-  `cpf` varchar(15) NOT NULL,
-  `rg` varchar(9) NOT NULL,
-  `nome` varchar(255) NOT NULL
+  `nome` varchar(255) NOT NULL,
+  `siape` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura da tabela `usuario`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE `usuario` (
   `id` int(11) NOT NULL,
   `login` varchar(255) NOT NULL,
   `senha` varchar(255) NOT NULL,
   `nivel` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `login`, `senha`, `nivel`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 2);
 
 --
 -- Índices para tabelas despejadas
@@ -169,51 +152,49 @@ ALTER TABLE `cidade`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `coordenador`
+-- Índices para tabela `curso`
 --
-ALTER TABLE `coordenador`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices para tabela `coorientador`
---
-ALTER TABLE `coorientador`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `curso`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idOrientador` (`idOrientador`);
 
 --
 -- Índices para tabela `empresa`
 --
 ALTER TABLE `empresa`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `representante` (`representante`);
 
 --
 -- Índices para tabela `estagio`
 --
 ALTER TABLE `estagio`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
   ADD KEY `idEstudante` (`idEstudante`),
+  ADD KEY `idEmpresa` (`idEmpresa`),
   ADD KEY `idCidade` (`idCidade`),
-  ADD KEY `idCoordenador` (`idCoordenador`),
+  ADD KEY `representante` (`representante`),
   ADD KEY `idCoorientador` (`idCoorientador`),
-  ADD KEY `idRepresentanteempresa` (`idRepresentanteempresa`);
+  ADD KEY `idOrientador` (`idOrientador`);
 
 --
 -- Índices para tabela `estudante`
 --
 ALTER TABLE `estudante`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCurso` (`idCurso`),
+  ADD KEY `idCidade` (`idCidade`);
+
+--
+-- Índices para tabela `professor`
+--
+ALTER TABLE `professor`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `representanteempresa`
+-- Índices para tabela `usuario`
 --
-ALTER TABLE `representanteempresa`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices para tabela `usuarios`
---
-ALTER TABLE `usuarios`
+ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -227,15 +208,9 @@ ALTER TABLE `cidade`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `coordenador`
+-- AUTO_INCREMENT de tabela `curso`
 --
-ALTER TABLE `coordenador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `coorientador`
---
-ALTER TABLE `coorientador`
+ALTER TABLE `curso`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -257,31 +232,44 @@ ALTER TABLE `estudante`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `representanteempresa`
+-- AUTO_INCREMENT de tabela `professor`
 --
-ALTER TABLE `representanteempresa`
+ALTER TABLE `professor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `usuarios`
+-- AUTO_INCREMENT de tabela `usuario`
 --
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `usuario`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restrições para despejos de tabelas
 --
 
 --
+-- Limitadores para a tabela `curso`
+--
+ALTER TABLE `curso`
+  ADD CONSTRAINT `curso_ibfk_1` FOREIGN KEY (`idOrientador`) REFERENCES `professor` (`id`);
+
+--
 -- Limitadores para a tabela `estagio`
 --
 ALTER TABLE `estagio`
-  ADD CONSTRAINT `estagio_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`),
-  ADD CONSTRAINT `estagio_ibfk_2` FOREIGN KEY (`idEstudante`) REFERENCES `estudante` (`id`),
-  ADD CONSTRAINT `estagio_ibfk_3` FOREIGN KEY (`idCidade`) REFERENCES `cidade` (`id`),
-  ADD CONSTRAINT `estagio_ibfk_4` FOREIGN KEY (`idCoordenador`) REFERENCES `coordenador` (`id`),
-  ADD CONSTRAINT `estagio_ibfk_5` FOREIGN KEY (`idCoorientador`) REFERENCES `coorientador` (`id`),
-  ADD CONSTRAINT `estagio_ibfk_6` FOREIGN KEY (`idRepresentanteempresa`) REFERENCES `representanteempresa` (`id`);
+  ADD CONSTRAINT `estagio_ibfk_1` FOREIGN KEY (`idEstudante`) REFERENCES `estudante` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estagio_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estagio_ibfk_3` FOREIGN KEY (`idCidade`) REFERENCES `cidade` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estagio_ibfk_4` FOREIGN KEY (`representante`) REFERENCES `empresa` (`representante`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estagio_ibfk_5` FOREIGN KEY (`idCoorientador`) REFERENCES `professor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `estagio_ibfk_6` FOREIGN KEY (`idOrientador`) REFERENCES `professor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Limitadores para a tabela `estudante`
+--
+ALTER TABLE `estudante`
+  ADD CONSTRAINT `estudante_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `curso` (`id`),
+  ADD CONSTRAINT `estudante_ibfk_2` FOREIGN KEY (`idCidade`) REFERENCES `cidade` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
