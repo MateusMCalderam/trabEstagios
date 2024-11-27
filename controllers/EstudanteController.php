@@ -39,10 +39,10 @@ final class EstudanteController extends Controller {
             $id, 
             $_POST['nome'], 
             $_POST['matricula'], 
-            $_POST['curso'], 
+            $_POST['idCurso'], 
             $_POST['cpf'], 
             $_POST['rg'], 
-            $_POST['cidade'], 
+            $_POST['idCidade'], 
             $_POST['telefone'], 
             $_POST['endereco'], 
             $_POST['email']
