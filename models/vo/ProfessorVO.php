@@ -2,15 +2,17 @@
 
 namespace Model\VO;
 
-final class CoorientadorVO extends VO {
+final class ProfessorVO extends VO {
 
     private $nome;
     private $email;
+    private $siape;
 
-    public function __construct($id = 0, $nome = "", $email = '') {
+    public function __construct($id = 0, $nome = "", $email = '', $siape = '') {
         parent::__construct($id);
         $this->nome = $nome;
         $this->email = $email;
+        $this->siape = $siape;
     }
 
     public function getNome() {
@@ -27,5 +29,12 @@ final class CoorientadorVO extends VO {
 
     public function setEmail($email) {
         $this->email = $email;
+    }
+    public function getSiape() {
+        return $this->siape;
+    }
+
+    public function setSiape($siape) {
+        $this->siape = $siape;
     }
 }
