@@ -5,6 +5,12 @@ namespace Controller;
 use Model\EstudanteModel;
 use Model\VO\EstudanteVO;
 
+use Model\CursoModel;
+use Model\VO\CursoVO;
+
+use Model\CidadeModel;
+use Model\VO\CidadeVO;
+
 final class EstudanteController extends Controller {
 
     public function list(){
@@ -19,6 +25,12 @@ final class EstudanteController extends Controller {
     public function form(){
         $id = $_GET['id'] ?? 0;
 
+        $modelCurso = new CursoModel();
+        $cursos = $modelCurso->selectAll(new CursoVO());
+
+        $modelCidade = new CidadeModel();
+        $cidades = $modelCidade->selectAll(new CidadeVO());
+
         if(empty($id)){
             $vo = new EstudanteVO();
         } else {
@@ -27,7 +39,9 @@ final class EstudanteController extends Controller {
         }
         
         $this->loadView("formEstudante", [
-            "estudante" => $vo
+            "estudante" => $vo,
+            "cursos" => $cursos,
+            "cidades" => $cidades
         ]);
     }
         

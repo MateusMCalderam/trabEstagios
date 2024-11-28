@@ -32,11 +32,11 @@
                     <td><?php echo $estudante->getId(); ?></td>
                     <td><?php echo $estudante->getNome(); ?></td>
                     <td><?php echo $estudante->getMatricula(); ?></td>
-                    <td><?php echo $estudante->getCurso(); ?></td>
+                    <td><?php echo $estudante->getNomeCurso(); ?></td>
                     <td><?php echo $estudante->getCpf(); ?></td>
                     <td><?php echo $estudante->getRg(); ?></td>
                     <td><?php echo $estudante->getEndereco(); ?></td>
-                    <td><?php echo $estudante->getCidade(); ?></td>
+                    <td><?php echo $estudante->getNomeCidade(); ?></td>
                     <td><?php echo $estudante->getTelefone(); ?></td>
                     <td><?php echo $estudante->getEmail(); ?></td>
                     <td>

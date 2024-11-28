@@ -13,8 +13,10 @@ final class EstudanteVO extends VO {
     private $telefone;
     private $endereco;
     private $email;
-
-    public function __construct($id = 0, $nome = "", $matricula = "", $idCurso = 0,$cpf = 0 , $rg = 0 , $idCidade = '' , $telefone = 0 ,  $endereco = '',  $email = '') {
+    private $nomeCurso;
+    private $nomeCidade;
+    
+    public function __construct($id = 0, $nome = "", $matricula = "", $idCurso = 0,$cpf = 0 , $rg = 0 , $idCidade = '' , $telefone = 0 ,  $endereco = '',  $email = '', $nomeCurso = "", $nomeCidade = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->matricula = $matricula;
@@ -25,6 +27,8 @@ final class EstudanteVO extends VO {
         $this->telefone = $telefone;
         $this->endereco = $endereco;
         $this->email = $email;
+        $this->nomeCurso = $nomeCurso;
+        $this->nomeCidade = $nomeCidade;
     }
 
     public function getNome() {
@@ -91,5 +95,21 @@ final class EstudanteVO extends VO {
 
     public function setEmail($email) {
         $this->email = $email;
+    }
+    
+    public function getNomeCurso() {
+        return $this->nomeCurso;
+    }
+
+    public function setNomeCurso($nomeCurso) {
+        $this->nomeCurso = $nomeCurso;
+    }
+    
+    public function getNomeCidade() {
+        return $this->nomeCidade;
+    }
+
+    public function setNomeCidade($nomeCidade) {
+        $this->nomeCidade = $nomeCidade;
     }
 }

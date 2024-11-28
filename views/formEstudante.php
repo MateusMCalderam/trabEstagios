@@ -13,11 +13,29 @@
         <input type="hidden" name="id" value="<?php echo $estudante->getId(); ?>">
         <input type="text" name="nome" value="<?php echo $estudante->getNome(); ?>" placeholder="Insira o nome do estudante:">
         <input type="text" name="matricula" value="<?php echo $estudante->getMatricula(); ?>" placeholder="Insira a matrícula do estudante:">
-        <input type="text" name="curso" value="<?php echo $estudante->getCurso(); ?>" placeholder="Insira o curso do estudante:">
-        <input type="" name="cpf" value="<?php echo $estudante->getCpf(); ?>" placeholder="Insira o CPF do estudante:">
+        <label for="idCurso">Selecione o Curso:</label>
+        <select name="idCurso" id="idCurso" required>
+            <option value="">Selecione um curso</option>
+            <?php foreach ($cursos as $curso): ?>
+                <option value="<?php echo $curso->getId(); ?>" 
+                    <?php echo $estudante->getIdCurso() == $curso->getId() ? 'selected' : ''; ?>>
+                    <?php echo $curso->getNome(); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        <input type="number" name="cpf" value="<?php echo $estudante->getCpf(); ?>" placeholder="Insira o CPF do estudante:">
         <input type="text" name="rg" value="<?php echo $estudante->getRg(); ?>" placeholder="Insira o RG do estudante:">
         <input type="text" name="endereco" value="<?php echo $estudante->getEndereco(); ?>" placeholder="Insira o endereço do estudante:">
-        <input type="text" name="cidade" value="<?php echo $estudante->getCidade(); ?>" placeholder="Insira a cidade do estudante:">
+        <label for="idCidade">Selecione a Cidade:</label>
+        <select name="idCidade" id="idCidade" required>
+            <option value="">Selecione uma cidade</option>
+            <?php foreach ($cidades as $cidade): ?>
+                <option value="<?php echo $cidade->getId(); ?>" 
+                    <?php echo $estudante->getIdCidade() == $cidade->getId() ? 'selected' : ''; ?>>
+                    <?php echo $cidade->getNome(); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
         <input type="text" name="telefone" value="<?php echo $estudante->getTelefone(); ?>" placeholder="Insira o telefone do estudante:">
         <input type="email" name="email" value="<?php echo $estudante->getEmail(); ?>" placeholder="Insira o email do estudante:">
         <button type="submit">Salvar Estudante</button>

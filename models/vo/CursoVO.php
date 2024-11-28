@@ -7,12 +7,14 @@ final class CursoVO extends VO {
     private $nome;
     private $idOrientador;
     private $emailOrientador;
+    private $nomeOrientador;
 
-    public function __construct($id = 0, $nome = "", $idOrientador = "", $emailOrientador = '') {
+    public function __construct($id = 0, $nome = "", $idOrientador = "", $emailOrientador = '', $nomeOrientador = "") {
         parent::__construct($id);
         $this->nome = $nome;
         $this->idOrientador = $idOrientador;
         $this->emailOrientador = $emailOrientador;
+        $this->nomeOrientador = $nomeOrientador;
     }
 
     public function getNome() {
@@ -37,5 +39,13 @@ final class CursoVO extends VO {
 
     public function setEmailOrientador($emailOrientador) {
         $this->emailOrientador = $emailOrientador;
+    }
+
+    public function getNomeOrientador() {
+        return $this->nomeOrientador;
+    }
+
+    public function setNomeOrientador($nomeOrientador) {
+        $this->nomeOrientador = $nomeOrientador;
     }
 }

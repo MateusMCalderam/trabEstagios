@@ -1,7 +1,13 @@
 <header>
     <ul>
         <li>
+            <a href="./professores">Professores</a>
+        </li>
+        <li>
             <a href="./usuarios">Usuários</a>
+        </li>
+        <li>
+            <a href="./cursos">Cursos</a>
         </li>
         <li>
             <a href="./estudantes">Estudantes</a>

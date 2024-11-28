@@ -47,7 +47,9 @@ final class ProfessorModel extends Model {
     public function update($vo) {
         $db = new Database();
 
-        $query = "UPDATE professor SET nome = :nome, email = :email WHERE id = :id";
+        print_r($vo);
+
+        $query = "UPDATE professor SET nome = :nome, email = :email, siape = :siape WHERE id = :id";
         $binds = [
             ":nome" => $vo->getNome(),
             ":email" => $vo->getEmail(),
