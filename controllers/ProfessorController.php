@@ -5,6 +5,8 @@ namespace Controller;
 use Model\ProfessorModel;
 use Model\VO\ProfessorVO;
 
+use Controller\UserController;
+
 final class ProfessorController extends Controller {
 
     public function list() {
@@ -44,6 +46,9 @@ final class ProfessorController extends Controller {
 
         if (empty($id)) {
             $result = $model->insert($vo);
+            
+            $userController = new UserController();
+            $userController->createNewUser($result->getEmail(), 2, null, null, $result->getId());
         } else {
             $result = $model->update($vo);
         }

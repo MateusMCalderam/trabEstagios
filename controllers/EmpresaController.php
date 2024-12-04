@@ -46,17 +46,19 @@ final class EmpresaController extends Controller {
             $_POST['email'],
             $_POST['cnpj'],
             $_POST['representante'],
-            $_POST['funcaoRepresentante'],
             $_POST['cpfRepresentante'],
             $_POST['rgRepresentante'],
+            $_POST['funcaoRepresentante'],
             $_POST['numConvenio'],
         );
+
+        print_r($vo);
                 
         if(empty($id)){
             $result = $model->insert($vo);
-        
+            
             $userController = new UserController();
-            $userController->createNewUser($result->getEmail(), 2, null, $result->getId(), null );
+            $userController->createNewUser($result->getEmail(), 2, $result->getId(), null, null );
         }else{
             $result = $model->update($vo);
         }

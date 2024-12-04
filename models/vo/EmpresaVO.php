@@ -6,18 +6,17 @@ final class EmpresaVO extends VO {
 
     private $nome;
     private $endereco;
-    private $cnpj;
-    private $representante;
-    private $numConvenio;
     private $telefone;
     private $email;
+    private $cnpj;
+    private $representante;
+    private $funcaoRepresentante;
     private $cpfRepresentante;
     private $rgRepresentante;
-    private $funcaoRepresentante;
+    private $numConvenio;
     
 
-    public function __construct($id = 0, $nome = "", $endereco = '',$cnpj = 0 , $representante = 0 , 
-    $numConvenio = '' , $telefone = 0 , $email = '', $cpfRepresentante = '', $rgRepresentante = '', $funcaoRepresentante = '') {
+    public function __construct($id = 0, $nome = "", $endereco = '', $telefone = 0 , $email = '', $cnpj = 0 , $representante = 0 , $cpfRepresentante = '', $rgRepresentante = '', $funcaoRepresentante = '', $numConvenio = '' ,) {
         parent::__construct($id);
         $this->nome = $nome;
         $this->endereco = $endereco;

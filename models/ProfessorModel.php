@@ -39,9 +39,15 @@ final class ProfessorModel extends Model {
             ":email" => $vo->getEmail(),
             ":siape" => $vo->getSiape()
         ];
-    
 
-        return $db->execute($query, $binds);
+        $result = $db->execute($query, $binds);
+
+        if ($result) {
+            $lastId = $db->getLastInsertedId();
+            return $this->selectOne(new ProfessorVO($lastId));
+        }
+    
+        return false; 
     }
 
     public function update($vo) {
