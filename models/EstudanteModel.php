@@ -70,7 +70,14 @@ final class EstudanteModel extends Model {
             ":email" => $vo->getEmail(),
         ];
 
-        return $db->execute($query, $binds);
+        $result = $db->execute($query, $binds);
+
+        if ($result) {
+            $lastId = $db->getLastInsertedId();
+            return $this->selectOne(new EstudanteVO($lastId));
+        }
+    
+        return false; 
     }
 
     public function update($vo) {

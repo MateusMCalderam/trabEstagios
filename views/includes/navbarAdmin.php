@@ -4,6 +4,9 @@
             <a href="./professores">Professores</a>
         </li>
         <li>
+            <a href="./empresas">Empresas</a>
+        </li>
+        <li>
             <a href="./usuarios">Usuários</a>
         </li>
         <li>

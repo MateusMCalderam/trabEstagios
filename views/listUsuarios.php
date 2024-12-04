@@ -16,6 +16,9 @@
                 <th>ID</th>
                 <th>Login</th>
                 <th>Nível</th>
+                <th>Id Empresa</th>
+                <th>Id Estudante</th>
+                <th>Id Professor</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -25,6 +28,9 @@
                     <td><?php echo $usuario->getId(); ?></td>
                     <td><?php echo $usuario->getLogin(); ?></td>
                     <td><?php echo $usuario->getNivel(); ?></td>
+                    <td><?php echo $usuario->getIdEmpresa(); ?></td>
+                    <td><?php echo $usuario->getIdEstudante(); ?></td>
+                    <td><?php echo $usuario->getIdProfessor(); ?></td>
                     <td>
                         <a href="./usuarios/form?id=<?= $usuario->getId(); ?>" class="edit">Editar</a>
                         <br>

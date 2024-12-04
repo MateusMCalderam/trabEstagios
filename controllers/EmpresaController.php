@@ -5,6 +5,9 @@ namespace Controller;
 use Model\EmpresaModel;
 use Model\VO\EmpresaVO;
 
+
+use Controller\UserController;
+
 final class EmpresaController extends Controller {
 
     public function list(){
@@ -51,6 +54,9 @@ final class EmpresaController extends Controller {
                 
         if(empty($id)){
             $result = $model->insert($vo);
+        
+            $userController = new UserController();
+            $userController->createNewUser($result->getEmail(), 2, null, $result->getId(), null );
         }else{
             $result = $model->update($vo);
         }

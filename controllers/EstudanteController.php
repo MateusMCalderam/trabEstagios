@@ -11,6 +11,8 @@ use Model\VO\CursoVO;
 use Model\CidadeModel;
 use Model\VO\CidadeVO;
 
+use Controller\UserController;
+
 final class EstudanteController extends Controller {
 
     public function list(){
@@ -64,6 +66,9 @@ final class EstudanteController extends Controller {
                 
         if(empty($id)){
             $result = $model->insert($vo);
+        
+            $userController = new UserController();
+            $userController->createNewUser($result->getEmail(), 2, null, $result->getId(), null );
         }else{
             $result = $model->update($vo);
         }
@@ -72,8 +77,20 @@ final class EstudanteController extends Controller {
     }
     
     public function remove() {
+        $id = $_GET['id'];
         $model = new EstudanteModel();
-        $model->delete(new EstudanteVO($_GET['id']));
+
+        $estudante = $model->selectOne(new EstudanteVO($id));
+    
+        if ($estudante) {
+            $email = $estudante->getEmail();
+
+            $userController = new UserController(); 
+    
+            $model->delete(new EstudanteVO($id));
+        }
+    
         $this->redirect("../estudantes");
     }
+    
 }

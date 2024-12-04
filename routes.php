@@ -6,6 +6,7 @@ $r->addRoute('GET', '/', 'HomeController@index');
 $r->addRoute('GET', '/login', 'LoginController@login');
 $r->addRoute('POST', '/login', 'LoginController@fazerLogin');
 $r->addRoute('GET', '/logout', 'LoginController@logout');
+$r->addRoute('GET', '/mandarEmail', 'LoginController@sendEmail');
 
 // Usuários
 $r->addRoute('GET', '/usuarios', 'UserController@list');
@@ -30,3 +31,9 @@ $r->addRoute('GET', '/cursos', 'CursoController@list');
 $r->addRoute('GET', '/cursos/form', 'CursoController@form');
 $r->addRoute('POST', '/cursos/save', 'CursoController@save');
 $r->addRoute('GET', '/cursos/remove', 'CursoController@remove');
+
+// Curso
+$r->addRoute('GET', '/empresas', 'EmpresaController@list');
+$r->addRoute('GET', '/empresas/form', 'EmpresaController@form');
+$r->addRoute('POST', '/empresas/save', 'EmpresaController@save');
+$r->addRoute('GET', '/empresas/remove', 'EmpresaController@remove');

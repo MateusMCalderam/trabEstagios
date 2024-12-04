@@ -35,11 +35,10 @@ final class EmpresaModel extends Model {
     public function insert($vo) {
         $db = new Database();
 
-        $query = "INSERT INTO empresa (nome, supervisor, endereco, cnpj, representante, numConvenio, telefone, email, cpfRepresentante, rgRepresentante, rgRepresentante) VALUES 
-        (:nome, :supervisor, :endereco, :cnpj, :representante, :numConvenio, :telefone, :email, :cpfRepresentante, :rgRepresentante, :funcaoRepresentante)";
+        $query = "INSERT INTO empresa (nome, supervisor, endereco, cnpj,  numConvenio, telefone, email, cpfRepresentante, rgRepresentante, rgRepresentante) VALUES 
+        (:nome, :supervisor, :endereco, :cnpj, :numConvenio, :telefone, :email, :cpfRepresentante, :rgRepresentante, :funcaoRepresentante)";
         $binds = [
             ":nome" => $vo->getNome(),
-            ":supervisor" => $vo->getSupervisor(),
             ":endereco" => $vo->getEndereco(),
             ":cnpj" => $vo->getCnpj(),
             ":representante" => $vo->getRepresentante(),
@@ -52,7 +51,15 @@ final class EmpresaModel extends Model {
         ];
     
 
-        return $db->execute($query, $binds);
+        $result = $db->execute($query, $binds);
+
+        
+        if ($result) {
+            $lastId = $db->getLastInsertedId();
+            return $this->selectOne(new EstudanteVO($lastId));
+        }
+    
+        return false; 
     }
 
     public function update($vo) {

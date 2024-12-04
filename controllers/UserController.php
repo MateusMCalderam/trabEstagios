@@ -52,4 +52,12 @@ final class UserController extends Controller
         $model->delete(new UserVO($_GET['id']));
         $this->redirect("../usuarios");
     }
+    
+    public function createNewUser($login, $nivel, $idEmpresa, $idEstudante, $idProfessor) {
+        echo $nivel;
+        $model = new UserModel();
+        $vo = new UserVO(null, $login, "", $nivel, $idEmpresa, $idEstudante, $idProfessor);
+
+        $result = $model->insert($vo);
+    }
 }
