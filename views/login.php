@@ -11,7 +11,9 @@
         <br>
         <input type="password" name="senha">
         <br>
+        <a href="./recuperarSenha">Recuperar Senha ou Primeiro Acesso</a>
+        <br>
         <button>Salvar</button>
-    </form>
+    </form> 
 </body>
 </html>

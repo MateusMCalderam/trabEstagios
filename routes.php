@@ -37,3 +37,8 @@ $r->addRoute('GET', '/empresas', 'EmpresaController@list');
 $r->addRoute('GET', '/empresas/form', 'EmpresaController@form');
 $r->addRoute('POST', '/empresas/save', 'EmpresaController@save');
 $r->addRoute('GET', '/empresas/remove', 'EmpresaController@remove');
+
+$r->addRoute('GET', '/recuperarSenha', 'LoginController@recuperarSenha');
+$r->addRoute('POST', '/enviarRecuperacao', 'LoginController@enviarRecuperacao');
+$r->addRoute('GET', '/resetSenha', 'LoginController@resetSenha');
+$r->addRoute('POST', '/processarNovaSenha', 'LoginController@processarNovaSenha');

@@ -56,7 +56,7 @@ final class UserController extends Controller
     public function createNewUser($login, $nivel, $idEmpresa, $idEstudante, $idProfessor) {
         echo $nivel;
         $model = new UserModel();
-        $vo = new UserVO(null, $login, "", $nivel, $idEmpresa, $idEstudante, $idProfessor);
+        $vo = new UserVO(null, $login, null, $nivel, $idEmpresa, $idEstudante, $idProfessor);
 
         $result = $model->insert($vo);
     }
