@@ -1,6 +1,6 @@
 <?php
 
 define("HOST", "localhost");
-define("BASE", "estagio2");
+define("BASE", "estagio");
 define("USER", "root");
 define("PASS", "");
