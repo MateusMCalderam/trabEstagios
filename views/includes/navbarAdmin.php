@@ -1,5 +1,5 @@
 <header>
-    <h1>Sistema - Gerenciar Estágio</h1>
+    <h1><b>Sistema -</b> Gerenciar Estágio</h1>
     <ul>
         <!-- <li>
             <a href="../listCadastros.php">Cadastros</a>

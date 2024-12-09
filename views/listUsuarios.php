@@ -10,8 +10,8 @@
     <body>
     <?php include("includes/navbarAdmin.php"); ?>
     <div class="body">
-    <h1>Lista de Usuários</h1>
-    <a href="./usuarios/form">Cadastrar Usuário</a>
+    <h2>Lista de Usuários</h2>
+    <a href="./usuarios/form" class="cadastrar">Cadastrar Usuário</a>
     <table border="1">
         <thead>
             <tr>

@@ -10,8 +10,8 @@
 <body>
     <?php include("includes/navbarAdmin.php"); ?>
     <div class="body">
-    <h1>Lista de Empresas</h1>
-    <a href="./empresas/form">Cadastrar Empresa</a>
+    <h2>Lista de Empresas</h2>
+    <a href="./empresas/form" class="cadastrar">Cadastrar Empresa</a>
     <table border="1">
         <thead>
             <tr>

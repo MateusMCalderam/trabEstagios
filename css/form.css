@@ -6,7 +6,6 @@
     margin: 0;
     font-family: "Raleway", sans-serif;
 }
-
 body{
     background-image: radial-gradient(ellipse, rgba(33, 206, 168, 0.904), rgb(0, 0, 0) 80%);
     background-repeat: no-repeat;
@@ -14,21 +13,50 @@ body{
     min-height: 100vh;
     height: 100%;
     display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.body{
+
+    width: 100%;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap: 20px;
 }
+.voltar{
+    height: 100px;
+    width: 100%;
+    padding: 20px;
+}
+.voltar a{
+    font-weight: bold;
+    text-decoration: none;
+    padding: 20px 35px;
+    color: #2ecca4;
+    font-size: 1rem;
+    border: 2px solid #2ecca4;
+    border-radius: 30px;
+    transition: ease 0.4s;
+    
+}
+.voltar a:hover{
+    transition: ease 0.4s;
+    color: white;
+    background-color: #2ecca4;
+}
 h1{
     font-weight: bold;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Raleway", sans-serif;
     font-size: 3.5rem;
     color: aqua;
     user-select: none;
     letter-spacing: 4px;
 }
 b{
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Raleway", sans-serif;
     color: white;
 }
 form{
@@ -115,4 +143,10 @@ h2{
     font-weight: bold;
     margin-bottom: 5px;
     user-select: none;
+}
+.voltar{
+    top: 0;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
 }
