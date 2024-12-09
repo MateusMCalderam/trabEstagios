@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/formCss.css">
+    <link rel="stylesheet" href="css/form.css">
     <title>Sistema Estágio</title>
 </head>
 <body>
-    <h1>Sistema - Gerenciar estágios</h1>
+    <h1><b>Sistema -</b>  Gerenciar estágios</h1>
     <form action="./login" method="POST">
+        <h2>Logar</h2>
         <input type="text" name="login">
         <br>
         <input type="password" name="senha">
