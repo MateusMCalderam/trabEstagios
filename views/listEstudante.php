@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/list.css">
     <base href="./trabEstagios">
     <title>Lista de Estudantes</title>
 </head>
 <body>
     <?php include("includes/navbarAdmin.php"); ?>
+    <div class="body">
     <h1>Lista de Estudantes</h1>
     <a href="./estudantes/form">Cadastrar Estudante</a>
     <table border="1">
@@ -48,5 +50,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
+    
 </body>
 </html>

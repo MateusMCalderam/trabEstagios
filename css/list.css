@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    height: 100px;
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    list-style-type: none;
+}
+h1{
+    font-weight: bold;
+    color: aqua;
+    user-select: none;
+    letter-spacing: 4px;
+}
+header a{
+    font-weight: bold;
+    text-decoration: none;
+    padding: 15px 25px;
+    color: #2ecca4;
+    border: 2px solid #2ecca4;
+    border-radius: 30px;
+    transition: ease 0.4s;
+}
+header a:hover{
+    transition: ease 0.4s;
+    color: white;
+    background-color: #2ecca4;
+}
+body{
+    background-image: radial-gradient(ellipse, rgba(33, 206, 168, 0.904), rgb(0, 0, 0) 80%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+    height: 100%;
+    
+}
+.body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 50px;
+}
+table{
+    border-collapse: collapse;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 0;
+}
+/* Cabeçalho */
+thead tr {
+    background-color: #2ecca4;
+    color: #ffffff;
+    text-align: left;
+    font-size: 18px;
+}
+
+th, 
+td {
+    padding: 20px 25px;
+    border-bottom: 1px solid #dddddd;
+    
+}
+
+/* Cor das linhas */
+tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+/* Célula de ações */
+table td:last-child {
+    text-align: center; /* Centraliza os links */
+    padding: 15px; /* Espaçamento interno */
+}
+
+table td:last-child a {
+    display: inline-block; /* Garante espaçamento entre links */
+    margin: 5px 10px; /* Espaçamento entre os botões */
+    padding: 8px 12px; /* Tamanho clicável dos botões */
+    font-size: 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    font-size: 1rem;
+}
+.edit {
+    color: #4CAF50;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    font-size: 1.5rem;
+    transition: 0.3s ease;
+}
+
+.edit:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.remove {
+    color: #e74c3c;
+    text-decoration: none;
+    padding: 5px 10px;
+    border: 1px solid #e74c3c;
+    border-radius: 4px;
+    transition: 0.3s ease;
+}
+
+.remove:hover {
+    background-color: #e74c3c;
+    color: white;
+}

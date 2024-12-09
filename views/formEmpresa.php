@@ -8,6 +8,9 @@
     <title>Formulário Empresa</title>
 </head>
 <body>
+    <div>
+        <a href="javascript:history.back()">Voltar</a>
+    </div>
     <h1>Formulário Empresa</h1>
     <form action="./save" method="POST">
         <input type="hidden" name="id" value="<?php echo $empresa->getId(); ?>">
