@@ -7,7 +7,7 @@
     font-family: "Raleway", sans-serif;
 }
 body{
-    background-image: radial-gradient(ellipse, rgba(33, 206, 168, 0.904), rgb(0, 0, 0) 80%);
+    background-image: url('../background.webp');
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
@@ -51,7 +51,7 @@ h1{
     font-weight: bold;
     font-family: "Raleway", sans-serif;
     font-size: 3.5rem;
-    color: aqua;
+    color: rgb(47, 226, 181);
     user-select: none;
     letter-spacing: 4px;
 }

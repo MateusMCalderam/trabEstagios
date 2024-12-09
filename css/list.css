@@ -65,13 +65,13 @@ header a:hover{
     background-color: #2ecca4;
 }
 body{
-    background-image: radial-gradient(ellipse, rgba(33, 206, 168, 0.904), rgb(0, 0, 0) 80%);
+    background-image: url('../background.webp');
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 100vh;
     height: 100%;
-    
 }
+
 .body{
     display: flex;
     flex-direction: column;

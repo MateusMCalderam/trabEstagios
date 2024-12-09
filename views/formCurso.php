@@ -12,7 +12,7 @@
         <a href="javascript:history.back()">Voltar</a>
     </div>
     <div class="body">
-        <h1>Formulário Curso</h1>
+        <h1><b>Formulário Curso</b></h1>
         <form action="./save" method="POST">
             <input type="hidden" name="id" value="<?php echo $curso->getId(); ?>">
             <input type="text" name="nome" value="<?php echo $curso->getNome(); ?>" placeholder="Insira o nome do curso:">

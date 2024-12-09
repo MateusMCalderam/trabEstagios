@@ -12,7 +12,7 @@
         <a href="javascript:history.back()">Voltar</a>
     </div>
     <div class="body">
-        <h1>Formulário Usuário</h1>
+        <h1><b>Formulário Usuário</b></h1>
         <form action="./save" method="POST">
             <input type="hidden" name="id" value="<?php echo $usuario->getId(); ?>">
             <input type="text" name="login" value="<?php echo $usuario->getLogin(); ?>" placeholder="Insira o login do usuário:">
