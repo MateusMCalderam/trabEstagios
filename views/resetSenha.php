@@ -8,6 +8,9 @@
   <title>Redefinir Senha</title>
 </head>
 <body>
+  <div class="voltar">
+        <a href="javascript:history.back()">Voltar</a>
+  </div>
   <div class="body">
     <form action="./processarNovaSenha" method="POST">
       <h2>Redefinir Senha</h2>

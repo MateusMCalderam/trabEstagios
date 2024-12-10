@@ -7,6 +7,9 @@
     <title>Sistema Estágio</title>
 </head>
 <body>
+    <div class="voltar">
+        <a href="javascript:history.back()">Voltar</a>
+    </div>
     <div class="body">
     <h1><b>Sistema -</b>  Gerenciar estágios</h1>
         <form action="./login" method="POST">

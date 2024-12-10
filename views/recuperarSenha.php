@@ -8,6 +8,9 @@
     <title>Recuperação de Senha</title>
 </head>
 <body>
+    <div class="voltar">
+        <a href="javascript:history.back()">Voltar</a>
+    </div>
     <div class="body">
         <h2>Recuperação de Senha</h2>
         <?php
