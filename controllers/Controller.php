@@ -4,18 +4,18 @@ namespace Controller;
 
 abstract class Controller {
 
-    public function __construct($obrigaLogin = true){
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
+    // public function __construct($obrigaLogin = true){
+    //     if (session_status() === PHP_SESSION_NONE) {
+    //         session_start();
+    //     }
 
-        if($obrigaLogin) {
-            if(!isset($_SESSION["usuario"])) {
-                $this->redirect("./login");
-                exit;
-            }
-        }        
-    }
+    //     if($obrigaLogin) {
+    //         if(!isset($_SESSION["usuario"])) {
+    //             $this->redirect("/trabEstagios/login");
+    //             exit;
+    //         }
+    //     }        
+    // }
 
     public function redirect($url) {
         header("Location: " . $url);

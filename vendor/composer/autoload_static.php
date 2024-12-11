@@ -18,6 +18,7 @@ class ComposerStaticInit88884181b7247b3180aca3f606584bfb
         'M' => 
         array (
             'Model\\' => 6,
+            'Middleware\\' => 11,
         ),
         'F' => 
         array (
@@ -37,6 +38,10 @@ class ComposerStaticInit88884181b7247b3180aca3f606584bfb
         'Model\\' => 
         array (
             0 => __DIR__ . '/../..' . '/models',
+        ),
+        'Middleware\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/middlewares',
         ),
         'FastRoute\\' => 
         array (

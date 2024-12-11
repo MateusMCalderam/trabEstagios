@@ -1,12 +1,23 @@
 <?php
 
-require 'vendor/autoload.php';
-
 use FastRoute\RouteCollector;
 use function FastRoute\simpleDispatcher;
 
-$dispatcher = simpleDispatcher(function(RouteCollector $r) {
-    require 'routes.php';
+use Middleware\AuthMiddleware;
+use Middleware\NivelMiddleware;
+require 'vendor/autoload.php';
+
+session_start();
+
+
+
+$routes = require 'routes.php';
+
+$dispatcher = simpleDispatcher(function (RouteCollector $r) use ($routes) {
+    foreach ($routes as $route) {
+        [$method, $path, $handler] = $route;
+        $r->addRoute($method, $path, $handler);
+    }
 });
 
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -17,46 +28,84 @@ if (false !== $pos = strpos($uri, '?')) {
 }
 $uri = rawurldecode($uri);
 
-$basePath = '/trabEstagios'; 
+$basePath = '/trabEstagios';
 if (strpos($uri, $basePath) === 0) {
     $uri = substr($uri, strlen($basePath));
 }
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
+
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         http_response_code(404);
         echo 'Página não encontrada!';
         break;
+
+    case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
+        http_response_code(405);
+        echo 'Método não permitido!';
+        break;
+
+    case FastRoute\Dispatcher::FOUND:
+        $routeAtual = $uri;
+        $middlewares = [];
+
+        foreach ($routes as $route) {
+            if ($route[1] === $routeAtual) {
+                $middlewares = isset($route[3]) ? $route[3] : []; 
+                break;
+            }
+        }
+
+        foreach ($middlewares as $middleware) {
+            if (is_array($middleware)) {
+                $middlewareName = $middleware[0];  // O nome do middleware
+                $params = isset($middleware[1]) ? (array) $middleware[1] : []; 
+            } else {
+                $middlewareName = $middleware;
+                $params = [];
+            }
         
-        case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-            http_response_code(405);
-            echo 'Método não permitido!';
-            break;
-            
-            case FastRoute\Dispatcher::FOUND:
-                list($controller, $method) = explode('@', $routeInfo[1]);
-                $controllerClass = "Controller\\{$controller}"; 
-                $controllerFile = "./controllers/{$controller}.php";
-                
-                if (file_exists($controllerFile)) {
-                    require_once $controllerFile;
-                    
-                    if (class_exists($controllerClass)) {
-                        $instance = new $controllerClass();
-                        
-                        if (method_exists($instance, $method)) {
-                        call_user_func_array([$instance, $method], $routeInfo[2]);
-                    } else {
-                        echo "Método {$method} não encontrado no controlador {$controller}.";
-                    }
+            // Verifique se a classe do middleware existe, incluindo o namespace completo
+            if (class_exists($middlewareName)) {
+                $middlewareInstance = new $middlewareName(...$params); // Passa os parâmetros para o construtor do middleware
+        
+                if (method_exists($middlewareInstance, 'handle')) {
+                    // Passe o objeto de requisição para o middleware e execute o próximo passo
+                    $middlewareInstance->handle(function() {
+                        // Este é o ponto onde a execução passaria para o próximo middleware ou controlador
+                    });
                 } else {
-                    echo "Classe {$controllerClass} não encontrada.";
+                    echo "O método 'handle' não foi encontrado no middleware {$middlewareName}.";
+                    exit;
                 }
             } else {
-                echo "Controlador {$controller} não encontrado.";
+                echo "Middleware {$middlewareName} não encontrado.";
+                exit;
             }
-            break;
+        }
         
+
+        [$controller, $method] = explode('@', $routeInfo[1]);
+        $controllerClass = "Controller\\{$controller}";
+        $controllerFile = "./controllers/{$controller}.php";
+
+        // Carrega e executa o controller
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+            if (class_exists($controllerClass)) {
+                $instance = new $controllerClass();
+                if (method_exists($instance, $method)) {
+                    call_user_func_array([$instance, $method], $routeInfo[2]);
+                } else {
+                    echo "Método {$method} não encontrado no controlador {$controller}.";
+                }
+            } else {
+                echo "Classe {$controllerClass} não encontrada.";
+            }
+        } else {
+            echo "Controlador {$controller} não encontrado.";
+        }
+        break;
 }

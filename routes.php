@@ -1,44 +1,53 @@
 <?php
+return [
+    ['GET', '/', 'HomeController@index'],
 
-$r->addRoute('GET', '/', 'HomeController@index');
+    // Login
+    ['GET', '/login', 'LoginController@login'],
+    ['POST', '/login', 'LoginController@fazerLogin'],
+    ['GET', '/logout', 'LoginController@logout', ['Middleware\AuthMiddleware']],
+    ['GET', '/mandarEmail', 'LoginController@sendEmail'],
 
-// Login
-$r->addRoute('GET', '/login', 'LoginController@login');
-$r->addRoute('POST', '/login', 'LoginController@fazerLogin');
-$r->addRoute('GET', '/logout', 'LoginController@logout');
-$r->addRoute('GET', '/mandarEmail', 'LoginController@sendEmail');
+    // Usuários (Protegido por middleware)
+    ['GET', '/usuarios', 'UserController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/usuarios/form', 'UserController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/usuarios/save', 'UserController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/usuarios/remove', 'UserController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
-// Usuários
-$r->addRoute('GET', '/usuarios', 'UserController@list');
-$r->addRoute('GET', '/usuarios/form', 'UserController@form');
-$r->addRoute('POST', '/usuarios/save', 'UserController@save');
-$r->addRoute('GET', '/usuarios/remove', 'UserController@remove');
+    // Estudantes (Protegido por middleware)
+    ['GET', '/estudantes', 'EstudanteController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estudantes/form', 'EstudanteController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/estudantes/save', 'EstudanteController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estudantes/remove', 'EstudanteController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
-// Estudantes
-$r->addRoute('GET', '/estudantes', 'EstudanteController@list');
-$r->addRoute('GET', '/estudantes/form', 'EstudanteController@form');
-$r->addRoute('POST', '/estudantes/save', 'EstudanteController@save');
-$r->addRoute('GET', '/estudantes/remove', 'EstudanteController@remove');
+    // Professores (Protegido por middleware)
+    ['GET', '/professores', 'ProfessorController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/professores/form', 'ProfessorController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/professores/save', 'ProfessorController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/professores/remove', 'ProfessorController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
-// Professores
-$r->addRoute('GET', '/professores', 'ProfessorController@list');
-$r->addRoute('GET', '/professores/form', 'ProfessorController@form');
-$r->addRoute('POST', '/professores/save', 'ProfessorController@save');
-$r->addRoute('GET', '/professores/remove', 'ProfessorController@remove');
+    // Cursos (Protegido por middleware)
+    ['GET', '/cursos', 'CursoController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/cursos/form', 'CursoController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/cursos/save', 'CursoController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/cursos/remove', 'CursoController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
-// Curso
-$r->addRoute('GET', '/cursos', 'CursoController@list');
-$r->addRoute('GET', '/cursos/form', 'CursoController@form');
-$r->addRoute('POST', '/cursos/save', 'CursoController@save');
-$r->addRoute('GET', '/cursos/remove', 'CursoController@remove');
+    // Empresas (Protegido por middleware)
+    ['GET', '/empresas', 'EmpresaController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/empresas/form', 'EmpresaController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/empresas/save', 'EmpresaController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/empresas/remove', 'EmpresaController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
-// Curso
-$r->addRoute('GET', '/empresas', 'EmpresaController@list');
-$r->addRoute('GET', '/empresas/form', 'EmpresaController@form');
-$r->addRoute('POST', '/empresas/save', 'EmpresaController@save');
-$r->addRoute('GET', '/empresas/remove', 'EmpresaController@remove');
+    // Recuperação de senha (rotas públicas)
+    ['GET', '/recuperarSenha', 'LoginController@recuperarSenha'],
+    ['POST', '/enviarRecuperacao', 'LoginController@enviarRecuperacao'],
+    ['GET', '/resetSenha', 'LoginController@resetSenha'],
+    ['POST', '/processarNovaSenha', 'LoginController@processarNovaSenha'],
 
-$r->addRoute('GET', '/recuperarSenha', 'LoginController@recuperarSenha');
-$r->addRoute('POST', '/enviarRecuperacao', 'LoginController@enviarRecuperacao');
-$r->addRoute('GET', '/resetSenha', 'LoginController@resetSenha');
-$r->addRoute('POST', '/processarNovaSenha', 'LoginController@processarNovaSenha');
+    // Estágios (Protegido por middleware)
+    ['GET', '/admin/estagios', 'EstagioController@listSecao', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estagios', 'EstagioController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 2]]],
+    ['GET', '/estagios/form', 'EstagioController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/estagios/save', 'EstagioController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estagios/remove', 'EstagioController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+];
