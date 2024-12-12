@@ -2,29 +2,29 @@
 
 namespace Controller;
 
+use Controller\UserController;
+use Model\CidadeModel;
+use Model\CursoModel;
 use Model\EstudanteModel;
+use Model\VO\CidadeVO;
+use Model\VO\CursoVO;
 use Model\VO\EstudanteVO;
 
-use Model\CursoModel;
-use Model\VO\CursoVO;
+final class EstudanteController extends Controller
+{
 
-use Model\CidadeModel;
-use Model\VO\CidadeVO;
-
-use Controller\UserController;
-
-final class EstudanteController extends Controller {
-
-    public function list(){
+    public function list()
+    {
         $model = new EstudanteModel();
         $data = $model->selectAll(new EstudanteVO());
 
         $this->loadView("listEstudante", [
-            "estudantes" => $data
+            "estudantes" => $data,
         ]);
     }
 
-    public function form(){
+    public function form()
+    {
         $id = $_GET['id'] ?? 0;
 
         $modelCurso = new CursoModel();
@@ -33,64 +33,66 @@ final class EstudanteController extends Controller {
         $modelCidade = new CidadeModel();
         $cidades = $modelCidade->selectAll(new CidadeVO());
 
-        if(empty($id)){
+        if (empty($id)) {
             $vo = new EstudanteVO();
         } else {
             $model = new EstudanteModel();
             $vo = $model->selectOne(new EstudanteVO($id));
         }
-        
+
         $this->loadView("formEstudante", [
             "estudante" => $vo,
             "cursos" => $cursos,
-            "cidades" => $cidades
+            "cidades" => $cidades,
         ]);
     }
-        
-    public function save() {
+
+    public function save()
+    {
         $id = $_POST['id'];
         $model = new EstudanteModel();
 
         $vo = new EstudanteVO(
-            $id, 
-            $_POST['nome'], 
-            $_POST['matricula'], 
-            $_POST['idCurso'], 
-            $_POST['cpf'], 
-            $_POST['rg'], 
-            $_POST['idCidade'], 
-            $_POST['telefone'], 
-            $_POST['endereco'], 
+            $id,
+            $_POST['nome'],
+            $_POST['matricula'],
+            $_POST['idCurso'],
+            $_POST['cpf'],
+            $_POST['rg'],
+            $_POST['idCidade'],
+            $_POST['telefone'],
+            $_POST['endereco'],
             $_POST['email']
         );
-                
-        if(empty($id)){
+
+        if (empty($id)) {
             $result = $model->insert($vo);
-        
+
             $userController = new UserController();
-            $userController->createNewUser($result->getEmail(), 2, null, $result->getId(), null );
-        }else{
+            $userController->createNewUser($result->getEmail(), 2, null, $result->getId(), null);
+        } else {
             $result = $model->update($vo);
         }
 
         $this->redirect("../estudantes");
     }
-    
-    public function remove() {
+
+    public function remove()
+    {
         $id = $_GET['id'];
         $model = new EstudanteModel();
 
         $estudante = $model->selectOne(new EstudanteVO($id));
-    
+
         if ($estudante) {
             $email = $estudante->getEmail();
 
-            $userController = new UserController(); 
-    
+            $userController = new UserController();
+
             $model->delete(new EstudanteVO($id));
         }
-    
+
         $this->redirect("../estudantes");
     }
-    
+
 }

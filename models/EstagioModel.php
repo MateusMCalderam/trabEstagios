@@ -27,15 +27,16 @@ final class EstagioModel extends Model
         return $arrayDados;
     }
 
-    public function selectAllInfo() { 
-        $db = new Database(); 
-        $query = "SELECT 
-            estagio.*, 
-            cidade.nome AS nomeCidade, 
-            estudante.nome AS nomeEstudante, 
-            orientador.nome AS nomeOrientador, 
-            empresa.nome AS nomeEmpresa, 
-            coorientador.nome AS nomeCoorientador 
+    public function selectAllInfo()
+    {
+        $db = new Database();
+        $query = "SELECT
+            estagio.*,
+            cidade.nome AS nomeCidade,
+            estudante.nome AS nomeEstudante,
+            orientador.nome AS nomeOrientador,
+            empresa.nome AS nomeEmpresa,
+            coorientador.nome AS nomeCoorientador
           FROM estagio
           LEFT JOIN cidade ON estagio.idCidade = cidade.id
           LEFT JOIN estudante ON estagio.idEstudante = estudante.id
@@ -43,7 +44,7 @@ final class EstagioModel extends Model
           LEFT JOIN professor AS coorientador ON estagio.idCoorientador = coorientador.id
           LEFT JOIN empresa ON estagio.idEmpresa = empresa.id";
 
-        $data = $db->select($query); 
+        $data = $db->select($query);
 
         $arrayDados = [];
         foreach ($data as $row) {
@@ -52,31 +53,33 @@ final class EstagioModel extends Model
                 $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"],
                 $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"],
                 $row["autoavaliacao"], $row["termoCompromisso"], $row["nomeCidade"], $row['nomeEstudante'], $row["nomeOrientador"], $row["nomeEmpresa"], $row["nomeCoorientador"]);
-                array_push($arrayDados, $vo);
-            }
+            array_push($arrayDados, $vo);
+        }
 
         return $arrayDados;
     }
 
-    public function selectAllByUser($userId, $userType) { 
-        $db = new Database(); $query = "SELECT estagio.*, cidade.nome AS nomeCidade, estudante.nome AS nomeEstudante, orientador.nome AS nomeOrientador, empresa.nome AS nomeEmpresa, coorientador.nome AS nomeCoorientador FROM estagio LEFT JOIN cidade ON estagio.idCidade = cidade.id LEFT JOIN estudante ON estagio.idEstudante = estudante.id LEFT JOIN professor AS orientador ON estagio.idOrientador = orientador.id LEFT JOIN professor AS coorientador ON estagio.idCoorientador = coorientador.id LEFT JOIN empresa ON estagio.idEmpresa = empresa.id WHERE "; 
-        
-        switch ($userType) { 
-            case 'estudante': 
+    public function selectAllByUser($userId, $userType)
+    {
+        $db = new Database();
+        $query = "SELECT estagio.*, cidade.nome AS nomeCidade, estudante.nome AS nomeEstudante, orientador.nome AS nomeOrientador, empresa.nome AS nomeEmpresa, coorientador.nome AS nomeCoorientador FROM estagio LEFT JOIN cidade ON estagio.idCidade = cidade.id LEFT JOIN estudante ON estagio.idEstudante = estudante.id LEFT JOIN professor AS orientador ON estagio.idOrientador = orientador.id LEFT JOIN professor AS coorientador ON estagio.idCoorientador = coorientador.id LEFT JOIN empresa ON estagio.idEmpresa = empresa.id WHERE ";
+
+        switch ($userType) {
+            case 'estudante':
                 $query .= "estagio.idEstudante = :userId";
-                 break; 
-            case 'professor': 
-                $query .= "(estagio.idOrientador = :userId OR estagio.idCoorientador = :userId)"; 
-                break; 
-            case 'empresa': 
-                $query .= "estagio.idEmpresa = :userId"; 
-                break; 
-            default: 
-                throw new Exception("Tipo de usuário desconhecido"); 
-            } 
+                break;
+            case 'professor':
+                $query .= "(estagio.idOrientador = :userId OR estagio.idCoorientador = :userId)";
+                break;
+            case 'empresa':
+                $query .= "estagio.idEmpresa = :userId";
+                break;
+            default:
+                throw new Exception("Tipo de usuário desconhecido");
+        }
 
-        $params = [":userId" => $userId]; 
-        $data =  $db->select($query, $params); 
+        $params = [":userId" => $userId];
+        $data = $db->select($query, $params);
 
         $arrayDados = [];
         foreach ($data as $row) {
@@ -85,12 +88,11 @@ final class EstagioModel extends Model
                 $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"],
                 $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"],
                 $row["autoavaliacao"], $row["termoCompromisso"], $row["nomeCidade"], $row['nomeEstudante'], $row["nomeOrientador"], $row["nomeEmpresa"], $row["nomeCoorientador"]);
-                array_push($arrayDados, $vo);
-            }
+            array_push($arrayDados, $vo);
+        }
 
         return $arrayDados;
     }
-
 
     public function selectOne($vo)
     {

@@ -51,8 +51,6 @@ final class EmpresaController extends Controller {
             $_POST['funcaoRepresentante'],
             $_POST['numConvenio'],
         );
-
-        print_r($vo);
                 
         if(empty($id)){
             $result = $model->insert($vo);

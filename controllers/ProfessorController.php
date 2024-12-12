@@ -2,23 +2,25 @@
 
 namespace Controller;
 
+use Controller\UserController;
 use Model\ProfessorModel;
 use Model\VO\ProfessorVO;
 
-use Controller\UserController;
+final class ProfessorController extends Controller
+{
 
-final class ProfessorController extends Controller {
-
-    public function list() {
+    public function list()
+    {
         $model = new ProfessorModel();
         $data = $model->selectAll(new ProfessorVO());
 
         $this->loadView("listProfessor", [
-            "professores" => $data
+            "professores" => $data,
         ]);
     }
 
-    public function form() {
+    public function form()
+    {
         $id = $_GET['id'] ?? 0;
 
         if (empty($id)) {
@@ -27,26 +29,27 @@ final class ProfessorController extends Controller {
             $model = new ProfessorModel();
             $vo = $model->selectOne(new ProfessorVO($id));
         }
-        
+
         $this->loadView("formProfessor", [
-            "professor" => $vo
+            "professor" => $vo,
         ]);
     }
 
-    public function save() {
+    public function save()
+    {
         $id = $_POST['id'];
         $model = new ProfessorModel();
 
         $vo = new ProfessorVO(
-            $id, 
-            $_POST['nome'], 
-            $_POST['email'], 
+            $id,
+            $_POST['nome'],
+            $_POST['email'],
             $_POST['siape']
         );
 
         if (empty($id)) {
             $result = $model->insert($vo);
-            
+
             $userController = new UserController();
             $userController->createNewUser($result->getEmail(), 2, null, null, $result->getId());
         } else {
@@ -56,7 +59,8 @@ final class ProfessorController extends Controller {
         $this->redirect("../professores");
     }
 
-    public function remove() {
+    public function remove()
+    {
         $model = new ProfessorModel();
         $model->delete(new ProfessorVO($_GET['id']));
         $this->redirect("../professores");

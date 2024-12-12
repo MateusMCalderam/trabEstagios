@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 12/12/2024 às 09:04
+-- Tempo de geração: 12/12/2024 às 22:21
 -- Versão do servidor: 8.0.30
 -- Versão do PHP: 8.3.13
 
@@ -41,10 +41,10 @@ CREATE TABLE `cidade` (
 INSERT INTO `cidade` (`id`, `nome`, `cep`, `isVisible`) VALUES
 (1, 'Cidade Nova', '12345678', 1),
 (2, 'São Cristóvão', '23456789', 1),
-(3, 'Jardim Alegre', '34567890', 1),
+(3, 'Jardim Alegre', '34567890', 0),
 (4, 'Vila Esperança', '45678901', 1),
 (5, 'Bela Vista', '56789012', 1),
-(6, 'Santa Maria', '67890123', 1),
+(6, 'Santa Maria', '67890123', 0),
 (7, 'Campo Verde', '78901234', 1),
 (8, 'Lago Azul', '89012345', 1),
 (9, 'Monte Alto', '90123456', 1),
@@ -115,7 +115,8 @@ INSERT INTO `empresa` (`id`, `nome`, `endereco`, `telefone`, `email`, `cnpj`, `r
 (7, 'TechnoWare', 'Rua Digital, 1617', 719876543, 'sales@technoware.com', 432109876, 'Lucas Rocha', 'Engenheiro', '78901234567', '7890123', 7, 1),
 (8, 'Safe Health', 'Rua da Saúde, 1819', 819876543, 'help@safehealth.com', 321098765, 'Fernanda Alves', 'Médica', '89012345678', '8901234', 8, 1),
 (9, 'Future Vision', 'Av. do Futuro, 2021', 919876543, 'vision@futurevision.com', 210987654, 'Roberto Santana', 'Consultor', '90123456789', '9012345', 9, 1),
-(10, 'Bright Ideas', 'Rua da Inovação, 2223', 101987654, 'info@brightideas.com', 109876543, 'Mariana Duarte', 'Analista', '12345098765', '1234509', 10, 1);
+(10, 'Bright Ideas', 'Rua da Inovação, 2223', 101987654, 'info@brightideas.com', 109876543, 'Mariana Duarte', 'Analista', '12345098765', '1234509', 10, 1),
+(11, 'Empresa Teste', 'Rua Osvaldo Aranha', 999999999, 'empresa@gmail.com', 30, 'Representante', 'Função', '02323023000', '32123132', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,6 @@ INSERT INTO `empresa` (`id`, `nome`, `endereco`, `telefone`, `email`, `cnpj`, `r
 
 CREATE TABLE `estagio` (
   `id` int NOT NULL,
-  `periodo` int NOT NULL,
   `area` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `cargaHoraria` int NOT NULL,
   `idEstudante` int NOT NULL,
@@ -145,17 +145,21 @@ CREATE TABLE `estagio` (
   `autoavaliacaoEmpresa` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `autoavaliacao` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `termoCompromisso` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `isVisible` tinyint(1) DEFAULT '1'
+  `isVisible` tinyint(1) DEFAULT '1',
+  `dataInicio` date DEFAULT '2024-01-01',
+  `dataFinal` date DEFAULT '2024-12-31'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `estagio`
 --
 
-INSERT INTO `estagio` (`id`, `periodo`, `area`, `cargaHoraria`, `idEstudante`, `idEmpresa`, `nomeSupervisor`, `cargoSupervisor`, `telefoneSupervisor`, `emailSupervisor`, `representante`, `idCidade`, `idCoorientador`, `idOrientador`, `tipoProcesso`, `status`, `planoAtividades`, `relatorioFinal`, `autoavaliacaoEmpresa`, `autoavaliacao`, `termoCompromisso`, `isVisible`) VALUES
-(11, 12122200, 'Informática', 200, 78, 4, 'Ricardo Silva', 'Diretor', '996212835', 'ricardo@gmail.com', 'Representante', 3, NULL, 12, 'Digital', 'Inicial', '', '', '', '', '', 1),
-(12, 122112, 'Agropecuária', 300, 79, 9, 'Laura Monteiro  ', 'Gerente de Produção ', '998378845', 'monteiro@gmail.com', 'Representante', 5, 14, 15, 'Digital', 'Inicial', '', '', '', '', '', 1),
-(13, 2121, 'Informática', 200, 84, 3, 'Supervisor', 'Desenvolvedor', '996178835', 'supervisor@gmail.com', 'Representante', 3, NULL, 14, 'Digital', 'Inicial', '', '', '', '', '', 1);
+INSERT INTO `estagio` (`id`, `area`, `cargaHoraria`, `idEstudante`, `idEmpresa`, `nomeSupervisor`, `cargoSupervisor`, `telefoneSupervisor`, `emailSupervisor`, `representante`, `idCidade`, `idCoorientador`, `idOrientador`, `tipoProcesso`, `status`, `planoAtividades`, `relatorioFinal`, `autoavaliacaoEmpresa`, `autoavaliacao`, `termoCompromisso`, `isVisible`, `dataInicio`, `dataFinal`) VALUES
+(11, 'Informática', 200, 78, 11, 'Ricardo Silva', 'Diretor', '996212835', 'ricardo@gmail.com', 'Representante', 3, NULL, 12, 'Digital', 'Inicial', '675aad45f3abe.pdf', '', '675abb6e2f94e.pdf', '', NULL, 1, '2024-01-01', '2024-06-04'),
+(12, 'Agropecuária', 300, 79, 9, 'Laura Monteiro  ', 'Gerente de Produção ', '998378845', 'monteiro@gmail.com', 'Representante', 5, 14, 15, 'Digital', 'Inicial', '', '', '', '', '', 1, '2024-01-01', '2024-12-31'),
+(13, 'Informática', 200, 84, 11, 'Supervisor', 'Desenvolvedor', '996178835', 'supervisor@gmail.com', 'Representante', 3, NULL, 14, 'Digital', 'Inicial', '', '', '', '', '', 1, '2024-01-01', '2024-12-31'),
+(14, 'Informática', 0, 74, 1, 'BaccuS Sustainability', 'aaaa', '54996178835', 'sistemabaccus@gmail.com', 'Representante', 2, NULL, 9, 'Digital', 'Inicial', '', '', '', '', '', 1, '2002-02-02', '2024-02-20'),
+(15, 'Informática', 200, 74, 1, 'Teste', 'Gerente de Produção ', '999999999', 'supervisor@gmail.com', 'Representante', 10, NULL, 9, 'Digital', 'Inicial', '', '', '', '', '', 1, '2024-02-10', '2024-04-20');
 
 -- --------------------------------------------------------
 
@@ -249,7 +253,8 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `login`, `senha`, `nivel`, `idProfessor`, `idEstudante`, `idEmpresa`, `token_recuperacao`, `token_expiracao`, `isVisible`) VALUES
 (1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, NULL, NULL, NULL, NULL, NULL, 1),
-(30, 'mateusmmcalderam@gmail.com', 'e8d95a51f3af4a3b134bf6bb680a213a', 2, NULL, 84, NULL, NULL, NULL, 1);
+(30, 'mateusmmcalderam@gmail.com', '202cb962ac59075b964b07152d234b70', 2, NULL, 84, NULL, NULL, NULL, 1),
+(31, 'empresa@gmail.com', 'e8d95a51f3af4a3b134bf6bb680a213a', 2, NULL, NULL, 11, NULL, NULL, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -329,13 +334,13 @@ ALTER TABLE `curso`
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `estagio`
 --
 ALTER TABLE `estagio`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de tabela `estudante`
@@ -353,7 +358,7 @@ ALTER TABLE `professor`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restrições para tabelas despejadas

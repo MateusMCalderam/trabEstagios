@@ -1,9 +1,6 @@
 <header>
     <h1><b>Sistema -</b> Gerenciar Estágio</h1>
     <ul>
-        <!-- <li>
-            <a href="../listCadastros.php">Cadastros</a>
-        </li> -->
         <li>
             <a href="/trabEstagios/estagiosSecao">Estágios</a>
         </li>

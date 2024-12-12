@@ -2,8 +2,8 @@
 
 namespace Model;
 
-use Model\VO\UserVO;
 use Model\Database;
+use Model\VO\UserVO;
 
 final class UserModel extends Model
 {
@@ -53,7 +53,7 @@ final class UserModel extends Model
     public function insert($vo)
     {
         $db = new Database();
-        $query = "INSERT INTO usuario (login, senha, nivel, idEmpresa, idEstudante, idProfessor, isVisible) 
+        $query = "INSERT INTO usuario (login, senha, nivel, idEmpresa, idEstudante, idProfessor, isVisible)
                     VALUES (:login, :senha, :nivel, :idEmpresa, :idEstudante, :idProfessor, 1)";
         $binds = [
             ":login" => $vo->getLogin(),
@@ -77,7 +77,7 @@ final class UserModel extends Model
             $binds = [
                 ":login" => $vo->getLogin(),
                 ":nivel" => $vo->getNivel(),
-                ":id" => $vo->getId()
+                ":id" => $vo->getId(),
             ];
         } else {
             $query = "UPDATE usuario SET login = :login, senha = :senha, nivel = :nivel
@@ -86,7 +86,7 @@ final class UserModel extends Model
                 ":login" => $vo->getLogin(),
                 ":senha" => md5($vo->getSenha()),
                 ":nivel" => $vo->getNivel(),
-                ":id" => $vo->getId()
+                ":id" => $vo->getId(),
             ];
         }
 
@@ -100,7 +100,7 @@ final class UserModel extends Model
                     WHERE id = :id AND isVisible = 1";
         $binds = [
             ":senha" => md5($password),
-            ":id" => $id
+            ":id" => $id,
         ];
 
         return $db->execute($query, $binds);
@@ -118,7 +118,7 @@ final class UserModel extends Model
     public function doLogin($vo)
     {
         $db = new Database();
-        $query = "SELECT * FROM usuario 
+        $query = "SELECT * FROM usuario
                 WHERE login = :login AND senha = :senha AND isVisible = 1";
 
         $binds = [
@@ -145,7 +145,8 @@ final class UserModel extends Model
         return $_SESSION['usuario'];
     }
 
-    public function verificaEmail($email) {
+    public function verificaEmail($email)
+    {
         $db = new Database();
         $query = "SELECT u.*
                 FROM usuario u
@@ -154,10 +155,10 @@ final class UserModel extends Model
                 LEFT JOIN empresa em ON u.idEmpresa = em.id
                 WHERE (p.email = :email OR e.email = :email OR em.email = :email) AND u.isVisible = 1
                 LIMIT 1";
-    
+
         $binds = [':email' => $email];
         $data = $db->select($query, $binds);
-        
+
         if (!empty($data)) {
             return new UserVO(
                 $data[0]['id'],
@@ -169,7 +170,7 @@ final class UserModel extends Model
                 $data[0]['idProfessor']
             );
         }
-        
+
         return $data;
     }
 
@@ -180,7 +181,7 @@ final class UserModel extends Model
         $binds = [
             ":token" => $token,
             ":token_expiracao" => $tokenExpiration,
-            ":id" => $userId
+            ":id" => $userId,
         ];
         return $db->execute($query, $binds);
     }

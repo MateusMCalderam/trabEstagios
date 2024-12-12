@@ -8,7 +8,7 @@
     <title>Lista de Cursos</title>
 </head>
 <body>
-    <?php include("includes/navbarAdmin.php"); ?>
+    <?php include "includes/navbarAdmin.php";?>
     <div class="body">
     <h2>Lista de Cursos</h2>
     <a href="./cursos/form" class="cadastrar">Cadastrar Curso</a>
@@ -31,18 +31,15 @@
                     <td><?php echo $curso->getNomeOrientador(); ?></td>
                     <td><?php echo $curso->getEmailOrientador(); ?></td>
                     <td>
-                        <a href="./cursos/form?id=<?= $curso->getId(); ?>" class="edit">Editar</a>
+                        <a href="./cursos/form?id=<?=$curso->getId();?>" class="edit">Editar</a>
                         <br>
-                        <a href="./cursos/remove?id=<?= $curso->getId(); ?>" class="remove">Excluir</a>
+                        <a href="./cursos/remove?id=<?=$curso->getId();?>" class="remove">Excluir</a>
                     </td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endforeach;?>
         </tbody>
     </table>
-
     </div>
-
-    
     </div>
 </body>
 </html>

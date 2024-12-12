@@ -18,14 +18,14 @@ final class EmpresaModel extends Model {
                 $row["id"], 
                 $row["nome"], 
                 $row["endereco"], 
-                $row["cnpj"], 
-                $row["representante"], 
-                $row["numConvenio"], 
                 $row["telefone"], 
                 $row["email"], 
+                $row["cnpj"], 
+                $row["representante"], 
                 $row["cpfRepresentante"], 
                 $row["rgRepresentante"], 
-                $row["funcaoRepresentante"]
+                $row["funcaoRepresentante"],
+                $row["numConvenio"]
             );
             array_push($arrayDados, $vo);
         }
