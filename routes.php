@@ -20,6 +20,12 @@ return [
     ['POST', '/estudantes/save', 'EstudanteController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/estudantes/remove', 'EstudanteController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 
+    // Cidades (Protegido por middleware)
+    ['GET', '/cidades', 'CidadeController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/cidades/form', 'CidadeController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/cidades/save', 'CidadeController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/cidades/remove', 'CidadeController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+
     // Professores (Protegido por middleware)
     ['GET', '/professores', 'ProfessorController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/professores/form', 'ProfessorController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
@@ -51,5 +57,6 @@ return [
     ['POST', '/estagios/save', 'EstagioController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/estagios/remove', 'EstagioController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/estagios/salvar', 'EstagioController@salvar', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['POST', '/estagios/removeFile', 'EstagioController@removeFile', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/mudaSectionEstagio', 'EstagioController@mudaSectionEstagio', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 ];

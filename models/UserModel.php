@@ -10,7 +10,7 @@ final class UserModel extends Model
     public function selectAll($vo)
     {
         $db = new Database();
-        $query = "SELECT * FROM usuario";
+        $query = "SELECT * FROM usuario WHERE isVisible = 1";
         $data = $db->select($query);
 
         $arrayList = [];
@@ -34,7 +34,7 @@ final class UserModel extends Model
     public function selectOne($vo)
     {
         $db = new Database();
-        $query = "SELECT * FROM usuario WHERE id = :id";
+        $query = "SELECT * FROM usuario WHERE id = :id AND isVisible = 1";
         $binds = [':id' => $vo->getId()];
 
         $data = $db->select($query, $binds);
@@ -53,8 +53,8 @@ final class UserModel extends Model
     public function insert($vo)
     {
         $db = new Database();
-        $query = "INSERT INTO usuario (login, senha, nivel, idEmpresa, idEstudante, idProfessor) 
-                    VALUES (:login, :senha, :nivel, :idEmpresa, :idEstudante, :idProfessor)";
+        $query = "INSERT INTO usuario (login, senha, nivel, idEmpresa, idEstudante, idProfessor, isVisible) 
+                    VALUES (:login, :senha, :nivel, :idEmpresa, :idEstudante, :idProfessor, 1)";
         $binds = [
             ":login" => $vo->getLogin(),
             ":senha" => md5($vo->getSenha()),
@@ -72,7 +72,7 @@ final class UserModel extends Model
         $db = new Database();
         if (empty($vo->getSenha())) {
             $query = "UPDATE usuario SET login = :login, nivel = :nivel
-                      WHERE id = :id";
+                      WHERE id = :id AND isVisible = 1";
 
             $binds = [
                 ":login" => $vo->getLogin(),
@@ -81,7 +81,7 @@ final class UserModel extends Model
             ];
         } else {
             $query = "UPDATE usuario SET login = :login, senha = :senha, nivel = :nivel
-                      WHERE id = :id";
+                      WHERE id = :id AND isVisible = 1";
             $binds = [
                 ":login" => $vo->getLogin(),
                 ":senha" => md5($vo->getSenha()),
@@ -97,7 +97,7 @@ final class UserModel extends Model
     {
         $db = new Database();
         $query = "UPDATE usuario SET senha = :senha
-                    WHERE id = :id";
+                    WHERE id = :id AND isVisible = 1";
         $binds = [
             ":senha" => md5($password),
             ":id" => $id
@@ -109,7 +109,7 @@ final class UserModel extends Model
     public function delete($vo)
     {
         $db = new Database();
-        $query = "DELETE FROM usuario WHERE id = :id";
+        $query = "UPDATE usuario SET isVisible = 0 WHERE id = :id";
         $binds = [":id" => $vo->getId()];
 
         return $db->execute($query, $binds);
@@ -119,7 +119,7 @@ final class UserModel extends Model
     {
         $db = new Database();
         $query = "SELECT * FROM usuario 
-                WHERE login = :login AND senha = :senha";
+                WHERE login = :login AND senha = :senha AND isVisible = 1";
 
         $binds = [
             ":login" => $vo->getLogin(),
@@ -145,14 +145,14 @@ final class UserModel extends Model
         return $_SESSION['usuario'];
     }
 
-    function verificaEmail($email) {
+    public function verificaEmail($email) {
         $db = new Database();
         $query = "SELECT u.*
                 FROM usuario u
                 LEFT JOIN professor p ON u.idProfessor = p.id
                 LEFT JOIN estudante e ON u.idEstudante = e.id
                 LEFT JOIN empresa em ON u.idEmpresa = em.id
-                WHERE p.email = :email OR e.email = :email OR em.email = :email
+                WHERE (p.email = :email OR e.email = :email OR em.email = :email) AND u.isVisible = 1
                 LIMIT 1";
     
         $binds = [':email' => $email];
@@ -176,7 +176,7 @@ final class UserModel extends Model
     public function updateRecoveryToken($userId, $token, $tokenExpiration)
     {
         $db = new Database();
-        $query = "UPDATE usuario SET token_recuperacao = :token, token_expiracao = :token_expiracao WHERE id = :id";
+        $query = "UPDATE usuario SET token_recuperacao = :token, token_expiracao = :token_expiracao WHERE id = :id AND isVisible = 1";
         $binds = [
             ":token" => $token,
             ":token_expiracao" => $tokenExpiration,
@@ -185,18 +185,15 @@ final class UserModel extends Model
         return $db->execute($query, $binds);
     }
 
-
     public function validateRecoveryToken($token)
     {
         $db = new Database();
 
-        // Consulta para verificar o token e sua validade
-        $query = "SELECT id, token_expiracao FROM usuario WHERE token_recuperacao = :token";
+        $query = "SELECT id, token_expiracao FROM usuario WHERE token_recuperacao = :token AND isVisible = 1";
         $binds = [":token" => $token];
         $data = $db->select($query, $binds);
 
         if (empty($data)) {
-            // Token inválido
             return [
                 'status' => false,
                 'message' => 'Token de recuperação inválido.',
@@ -207,14 +204,12 @@ final class UserModel extends Model
         $currentTime = date('Y-m-d H:i:s');
 
         if ($currentTime > $tokenExpiration) {
-            // Token expirado
             return [
                 'status' => false,
                 'message' => 'O token de recuperação expirou.',
             ];
         }
 
-        // Token válido
         return [
             'status' => true,
             'userId' => $data[0]['id'],

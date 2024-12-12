@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Tempo de geração: 04/12/2024 às 13:20
+-- Tempo de geração: 12/12/2024 às 09:04
 -- Versão do servidor: 8.0.30
 -- Versão do PHP: 8.3.13
 
@@ -30,15 +30,25 @@ SET time_zone = "+00:00";
 CREATE TABLE `cidade` (
   `id` int NOT NULL,
   `nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
-  `cep` varchar(8) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `cep` varchar(8) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `cidade`
 --
 
-INSERT INTO `cidade` (`id`, `nome`, `cep`) VALUES
-(1, 'Bento Gonçalves', '95703300');
+INSERT INTO `cidade` (`id`, `nome`, `cep`, `isVisible`) VALUES
+(1, 'Cidade Nova', '12345678', 1),
+(2, 'São Cristóvão', '23456789', 1),
+(3, 'Jardim Alegre', '34567890', 1),
+(4, 'Vila Esperança', '45678901', 1),
+(5, 'Bela Vista', '56789012', 1),
+(6, 'Santa Maria', '67890123', 1),
+(7, 'Campo Verde', '78901234', 1),
+(8, 'Lago Azul', '89012345', 1),
+(9, 'Monte Alto', '90123456', 1),
+(10, 'Flor da Serra', '01234567', 1);
 
 -- --------------------------------------------------------
 
@@ -50,16 +60,25 @@ CREATE TABLE `curso` (
   `id` int NOT NULL,
   `nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `idOrientador` int DEFAULT NULL,
-  `emailOrientador` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `emailOrientador` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `curso`
 --
 
-INSERT INTO `curso` (`id`, `nome`, `idOrientador`, `emailOrientador`) VALUES
-(1, 'Info', 1, 'bbbbbbbb@gmail.com'),
-(3, 'Agro', 3, 'aaaa@gmail.com');
+INSERT INTO `curso` (`id`, `nome`, `idOrientador`, `emailOrientador`, `isVisible`) VALUES
+(6, 'Informática para Internet', 1, 'orientador1@instituto.com', 1),
+(7, 'Meio Ambiente', 2, 'orientador2@instituto.com', 1),
+(8, 'Viticultura e Enologia', 3, 'orientador3@instituto.com', 1),
+(9, 'Administração', 4, 'orientador4@instituto.com', 1),
+(10, 'Agropecuária', 5, 'orientador5@instituto.com', 1),
+(21, 'Informática para Internet', 11, 'orientador1@instituto.com', 1),
+(22, 'Meio Ambiente', 12, 'orientador2@instituto.com', 1),
+(23, 'Viticultura e Enologia', 13, 'orientador3@instituto.com', 1),
+(24, 'Administração', 14, 'orientador4@instituto.com', 1),
+(25, 'Agropecuária', 15, 'orientador5@instituto.com', 1);
 
 -- --------------------------------------------------------
 
@@ -78,8 +97,25 @@ CREATE TABLE `empresa` (
   `funcaoRepresentante` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `cpfRepresentante` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `rgRepresentante` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `numConvenio` int DEFAULT NULL
+  `numConvenio` int DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `empresa`
+--
+
+INSERT INTO `empresa` (`id`, `nome`, `endereco`, `telefone`, `email`, `cnpj`, `representante`, `funcaoRepresentante`, `cpfRepresentante`, `rgRepresentante`, `numConvenio`, `isVisible`) VALUES
+(1, 'Tech Solutions', 'Rua das Flores, 123', 987654321, 'contato@techsolutions.com', 123456789, 'João Silva', 'Diretor', '12345678901', '1234567', 1, 1),
+(2, 'Green Farms', 'Av. Central, 456', 219876543, 'info@greenfarms.com', 987654321, 'Maria Oliveira', 'Gerente', '23456789012', '2345678', 2, 1),
+(3, 'Innovative Tech', 'Praça da Liberdade, 789', 319876543, 'suporte@innovativetech.com', 876543210, 'Carlos Pereira', 'CTO', '34567890123', '3456789', 3, 1),
+(4, 'Eco Energia', 'Rua Verde, 1011', 419876543, 'eco@ecoenergia.com', 765432109, 'Ana Costa', 'CEO', '45678901234', '4567890', 4, 1),
+(5, 'Global Trade', 'Av. Internacional, 1213', 519876543, 'contact@globaltrade.com', 654321098, 'Pedro Lima', 'Supervisor', '56789012345', '5678901', 5, 1),
+(6, 'Agro Vida', 'Estrada Rural, 1415', 619876543, 'contato@agrovida.com', 543210987, 'Sofia Mendes', 'Diretora', '67890123456', '6789012', 6, 1),
+(7, 'TechnoWare', 'Rua Digital, 1617', 719876543, 'sales@technoware.com', 432109876, 'Lucas Rocha', 'Engenheiro', '78901234567', '7890123', 7, 1),
+(8, 'Safe Health', 'Rua da Saúde, 1819', 819876543, 'help@safehealth.com', 321098765, 'Fernanda Alves', 'Médica', '89012345678', '8901234', 8, 1),
+(9, 'Future Vision', 'Av. do Futuro, 2021', 919876543, 'vision@futurevision.com', 210987654, 'Roberto Santana', 'Consultor', '90123456789', '9012345', 9, 1),
+(10, 'Bright Ideas', 'Rua da Inovação, 2223', 101987654, 'info@brightideas.com', 109876543, 'Mariana Duarte', 'Analista', '12345098765', '1234509', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -100,7 +136,7 @@ CREATE TABLE `estagio` (
   `emailSupervisor` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `representante` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `idCidade` int NOT NULL,
-  `idCoorientador` int NOT NULL,
+  `idCoorientador` int DEFAULT NULL,
   `idOrientador` int NOT NULL,
   `tipoProcesso` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
@@ -108,8 +144,18 @@ CREATE TABLE `estagio` (
   `relatorioFinal` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `autoavaliacaoEmpresa` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `autoavaliacao` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `termoCompromisso` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `termoCompromisso` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `estagio`
+--
+
+INSERT INTO `estagio` (`id`, `periodo`, `area`, `cargaHoraria`, `idEstudante`, `idEmpresa`, `nomeSupervisor`, `cargoSupervisor`, `telefoneSupervisor`, `emailSupervisor`, `representante`, `idCidade`, `idCoorientador`, `idOrientador`, `tipoProcesso`, `status`, `planoAtividades`, `relatorioFinal`, `autoavaliacaoEmpresa`, `autoavaliacao`, `termoCompromisso`, `isVisible`) VALUES
+(11, 12122200, 'Informática', 200, 78, 4, 'Ricardo Silva', 'Diretor', '996212835', 'ricardo@gmail.com', 'Representante', 3, NULL, 12, 'Digital', 'Inicial', '', '', '', '', '', 1),
+(12, 122112, 'Agropecuária', 300, 79, 9, 'Laura Monteiro  ', 'Gerente de Produção ', '998378845', 'monteiro@gmail.com', 'Representante', 5, 14, 15, 'Digital', 'Inicial', '', '', '', '', '', 1),
+(13, 2121, 'Informática', 200, 84, 3, 'Supervisor', 'Desenvolvedor', '996178835', 'supervisor@gmail.com', 'Representante', 3, NULL, 14, 'Digital', 'Inicial', '', '', '', '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -127,15 +173,26 @@ CREATE TABLE `estudante` (
   `telefone` int DEFAULT NULL,
   `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `idCurso` int NOT NULL,
-  `idCidade` int NOT NULL
+  `idCidade` int NOT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `estudante`
 --
 
-INSERT INTO `estudante` (`id`, `matricula`, `nome`, `cpf`, `rg`, `endereco`, `telefone`, `email`, `idCurso`, `idCidade`) VALUES
-(29, 312312, 'Mateus Teste', '123', '0', 'Rua Osvaldo Aranha', 0, 'mateusmmcalderam@gmail.com', 1, 1);
+INSERT INTO `estudante` (`id`, `matricula`, `nome`, `cpf`, `rg`, `endereco`, `telefone`, `email`, `idCurso`, `idCidade`, `isVisible`) VALUES
+(74, 20230001, 'Ana Clara Silva', '12345678901', 'MG1234567', 'Rua A, 123, Centro', 987654321, 'ana.clara@email.com', 21, 1, 1),
+(75, 20230002, 'Bruno Henrique Santos', '98765432109', 'SP7654321', 'Rua B, 456, Bairro Alto', 987654321, 'bruno.henrique@email.com', 22, 2, 1),
+(76, 20230003, 'Carla Mendes Oliveira', '56789012345', 'RJ5678901', 'Av. Central, 789, Cidade Nova', 912345678, 'carla.oliveira@email.com', 23, 3, 1),
+(77, 20230004, 'Daniel Costa Ferreira', '43210987654', 'ES4321098', 'Rua das Flores, 12, Jardim', 912345678, 'daniel.costa@email.com', 24, 4, 1),
+(78, 20230005, 'Elisa Ramos Pereira', '89012345678', 'RS8901234', 'Rua Verde, 345, Vista Alegre', 987654321, 'elisa.pereira@email.com', 25, 5, 1),
+(79, 20230006, 'Felipe Souza Andrade', '21098765432', 'PR2109876', 'Av. Azul, 678, Centro', 987654321, 'felipe.andrade@email.com', 21, 6, 1),
+(80, 20230007, 'Gabriela Tavares Lima', '34567890123', 'SC3456789', 'Rua Amarela, 901, Jardim América', 976543210, 'gabriela.lima@email.com', 22, 7, 1),
+(81, 20230008, 'Henrique Matos Silva', '65432109876', 'BA6543210', 'Rua Laranja, 234, São José', 976543210, 'henrique.silva@email.com', 23, 8, 1),
+(82, 20230009, 'Isabela Martins Rocha', '87654321098', 'PE8765432', 'Rua Roxa, 567, Nova Esperança', 965432109, 'isabela.rocha@email.com', 24, 9, 1),
+(83, 20230010, 'João Pedro Carvalho', '09876543210', 'CE0987654', 'Av. Lilás, 890, Cidade Jardim', 965432109, 'joao.carvalho@email.com', 25, 10, 1),
+(84, 202310045, 'Mateus', '02222222222', '2222222222', 'mateusmmcalderam@gmail.com', 990000000, 'mateusmmcalderam@gmail.com', 21, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -147,16 +204,25 @@ CREATE TABLE `professor` (
   `id` int NOT NULL,
   `nome` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `siape` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `email` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `professor`
 --
 
-INSERT INTO `professor` (`id`, `nome`, `siape`, `email`) VALUES
-(1, 'Professor Nome', '122121211222333', 'professor@gmail.com'),
-(3, 'Professor Nome 2 ', '12212121', 'professor@gmail.com');
+INSERT INTO `professor` (`id`, `nome`, `siape`, `email`, `isVisible`) VALUES
+(9, 'Maria Silva', '1234567', 'maria.silva@universidade.com', 1),
+(10, 'João Oliveira', '2345678', 'joao.oliveira@universidade.com', 1),
+(11, 'Ana Costa', '3456789', 'ana.costa@universidade.com', 1),
+(12, 'Carlos Pereira', '4567890', 'carlos.pereira@universidade.com', 1),
+(13, 'Fernanda Lima', '5678901', 'fernanda.lima@universidade.com', 1),
+(14, 'Ricardo Souza', '6789012', 'ricardo.souza@universidade.com', 1),
+(15, 'Juliana Mendes', '7890123', 'juliana.mendes@universidade.com', 1),
+(16, 'Pedro Alves', '8901234', 'pedro.alves@universidade.com', 1),
+(17, 'Sofia Rocha', '9012345', 'sofia.rocha@universidade.com', 1),
+(18, 'Lucas Santos', '0123456', 'lucas.santos@universidade.com', 1);
 
 -- --------------------------------------------------------
 
@@ -171,15 +237,19 @@ CREATE TABLE `usuario` (
   `nivel` int NOT NULL DEFAULT '1',
   `idProfessor` int DEFAULT NULL,
   `idEstudante` int DEFAULT NULL,
-  `idEmpresa` int DEFAULT NULL
+  `idEmpresa` int DEFAULT NULL,
+  `token_recuperacao` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `token_expiracao` datetime DEFAULT NULL,
+  `isVisible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `usuario`
 --
 
-INSERT INTO `usuario` (`id`, `login`, `senha`, `nivel`, `idProfessor`, `idEstudante`, `idEmpresa`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, NULL, NULL, NULL);
+INSERT INTO `usuario` (`id`, `login`, `senha`, `nivel`, `idProfessor`, `idEstudante`, `idEmpresa`, `token_recuperacao`, `token_expiracao`, `isVisible`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 1, NULL, NULL, NULL, NULL, NULL, 1),
+(30, 'mateusmmcalderam@gmail.com', 'e8d95a51f3af4a3b134bf6bb680a213a', 2, NULL, 84, NULL, NULL, NULL, 1);
 
 --
 -- Índices para tabelas despejadas
@@ -213,7 +283,6 @@ ALTER TABLE `estagio`
   ADD KEY `idEstudante` (`idEstudante`),
   ADD KEY `idEmpresa` (`idEmpresa`),
   ADD KEY `idCidade` (`idCidade`),
-  ADD KEY `representante` (`representante`),
   ADD KEY `idCoorientador` (`idCoorientador`),
   ADD KEY `idOrientador` (`idOrientador`);
 
@@ -248,43 +317,43 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `cidade`
 --
 ALTER TABLE `cidade`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `curso`
 --
 ALTER TABLE `curso`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `empresa`
 --
 ALTER TABLE `empresa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `estagio`
 --
 ALTER TABLE `estagio`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `estudante`
 --
 ALTER TABLE `estudante`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT de tabela `professor`
 --
 ALTER TABLE `professor`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Restrições para tabelas despejadas
@@ -303,7 +372,6 @@ ALTER TABLE `estagio`
   ADD CONSTRAINT `estagio_ibfk_1` FOREIGN KEY (`idEstudante`) REFERENCES `estudante` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `estagio_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `empresa` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `estagio_ibfk_3` FOREIGN KEY (`idCidade`) REFERENCES `cidade` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `estagio_ibfk_4` FOREIGN KEY (`representante`) REFERENCES `empresa` (`representante`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `estagio_ibfk_5` FOREIGN KEY (`idCoorientador`) REFERENCES `professor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `estagio_ibfk_6` FOREIGN KEY (`idOrientador`) REFERENCES `professor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 

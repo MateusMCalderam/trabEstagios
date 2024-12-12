@@ -8,7 +8,7 @@ final class CursoModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT c.*, p.nome as nomeOrientador FROM curso c JOIN professor p ON p.id = c.idOrientador ";
+        $query = "SELECT c.*, p.nome as nomeOrientador FROM curso c JOIN professor p ON p.id = c.idOrientador WHERE c.isVisible = 1";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -19,7 +19,7 @@ final class CursoModel extends Model {
                 $row["nome"],
                 $row["idOrientador"], 
                 $row["emailOrientador"],
-                $row["nomeOrientador"],
+                $row["nomeOrientador"]
             );
             array_push($arrayDados, $vo);
         }
@@ -29,7 +29,7 @@ final class CursoModel extends Model {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT * FROM curso WHERE id = :id";
+        $query = "SELECT * FROM curso WHERE id = :id AND isVisible = 1";
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -37,14 +37,14 @@ final class CursoModel extends Model {
             $data[0]["id"],
             $data[0]["nome"],
             $data[0]["idOrientador"],
-            $data[0]["emailOrientador"],
+            $data[0]["emailOrientador"]
         );
     }
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO curso (nome, idOrientador, emailOrientador) 
-                  VALUES (:nome, :idOrientador, :emailOrientador)";
+        $query = "INSERT INTO curso (nome, idOrientador, emailOrientador, isVisible) 
+                  VALUES (:nome, :idOrientador, :emailOrientador, 1)";
         $binds = [
             ":nome" => $vo->getNome(),
             ":idOrientador" => $vo->getIdOrientador(),
@@ -57,7 +57,7 @@ final class CursoModel extends Model {
     public function update($vo) {
         $db = new Database();
         $query = "UPDATE curso 
-                  SET nome = :nome, idOrientador = :idOrientador, emailOrientador = :emailOrientador WHERE id = :id";
+                  SET nome = :nome, idOrientador = :idOrientador, emailOrientador = :emailOrientador, isVisible = 1 WHERE id = :id";
         $binds = [
             ":nome" => $vo->getNome(),
             ":idOrientador" => $vo->getIdOrientador(),
@@ -70,7 +70,8 @@ final class CursoModel extends Model {
 
     public function delete($vo) {
         $db = new Database();
-        $query = "DELETE FROM curso WHERE id = :id";
+        $query = "UPDATE curso 
+                  SET isVisible = 0 WHERE id = :id";
         $binds = [":id" => $vo->getId()];
 
         return $db->execute($query, $binds);

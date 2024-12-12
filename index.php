@@ -8,9 +8,6 @@ use Middleware\NivelMiddleware;
 require 'vendor/autoload.php';
 
 session_start();
-
-
-
 $routes = require 'routes.php';
 
 $dispatcher = simpleDispatcher(function (RouteCollector $r) use ($routes) {

@@ -23,21 +23,27 @@ final class EstagioVO extends VO {
     //Representante 
     private $representante;
     private $nomeSupervisor;
-    private $cargoSupervisor;
+    private $cargoSupervisor;  
     private $telefoneSupervisor;
     private $emailSupervisor;
-
+    
     //Documentos 
     private $planoAtividades;
     private $relatorioFinal;
     private $autoavaliacaoEmpresa;
     private $autoavaliacao;
     private $termoCompromisso;
-
+    
+    private $nomeCidade; 
+    private $nomeEstudante;
+    private $nomeOrientador;
+    private $nomeEmpresa;
+    private $nomeCoorientador;
+    
     public function __construct($id = 0, $periodo = 0, $area = "", $cargaHoraria = 0,$idEstudante = 0 , $idOrientador = 0 , 
     $idEmpresa = 0 , $representante = '' , $idCidade = 0, $idCoorientador = 0, $nomeSupervisor = '', $cargoSupervisor = '', 
     $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $status = '', $planoAtividades = '', $relatorioFinal = '', 
-    $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '') {
+    $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '', $nomeCidade = "", $nomeEstudante = "", $nomeOrientador = "", $nomeEmpresa = "", $nomeCoorientador = "") {
         parent::__construct($id);
         $this->periodo = $periodo;
         $this->area = $area;
@@ -59,6 +65,12 @@ final class EstagioVO extends VO {
         $this->autoavaliacaoEmpresa = $autoavaliacaoEmpresa;
         $this->autoavaliacao = $autoavaliacao;
         $this->termoCompromisso = $termoCompromisso;
+
+        $this->nomeCidade = $nomeCidade; 
+        $this->nomeEstudante = $nomeEstudante;
+        $this->nomeOrientador = $nomeOrientador;
+        $this->nomeEmpresa = $nomeEmpresa;
+        $this->nomeCoorientador = $nomeCoorientador;
     }
 
     public function getPeriodo() {
@@ -194,5 +206,48 @@ final class EstagioVO extends VO {
     public function getTermoCompromisso() {
         return $this->termoCompromisso;
     }
+
+    // Getters e setters para $nomeCidade 
+    public function getNomeCidade() { 
+        return $this->nomeCidade; 
+    } 
     
+    public function setNomeCidade($nomeCidade) { 
+        $this->nomeCidade = $nomeCidade; 
+    } 
+
+    // Getters e setters para $nomeEstudante 
+    public function getNomeEstudante() { 
+        return $this->nomeEstudante; 
+    } 
+
+    public function setNomeEstudante($nomeEstudante) { 
+        $this->nomeEstudante = $nomeEstudante; 
+    } 
+
+    // Getters e setters para $nomeOrientador 
+    public function getNomeOrientador() { 
+        return $this->nomeOrientador;
+    } 
+
+    public function setNomeOrientador($nomeOrientador) {
+        $this->nomeOrientador = $nomeOrientador; 
+    } 
+
+    // Getters e setters para $nomeEmpresa 
+    public function getNomeEmpresa() { 
+        return $this->nomeEmpresa; 
+    } 
+
+    public function setNomeEmpresa($nomeEmpresa) { 
+        $this->nomeEmpresa = $nomeEmpresa; 
+    } 
+
+    public function getNomeCoorientador() { 
+        return $this->nomeCoorientador; 
+    } 
+
+    public function setNomeCoorientador($nomeCoorientador) { 
+        $this->nomeCoorientador = $nomeCoorientador; 
+    } 
 }

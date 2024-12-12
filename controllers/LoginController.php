@@ -8,10 +8,6 @@ use PHPMailer\PHPMailer\Exception;
 
 final class LoginController extends Controller {
 
-    // public function __construct() {
-    //     parent::__construct(false);
-    // }
-
     public function login() {
         $this->loadView("login");
     }
@@ -27,7 +23,6 @@ final class LoginController extends Controller {
         $model = new UserModel();
         $result = $model->doLogin($vo);
 
-        print_r($result->getNivel());
     
         if (empty($result)) {
             header("Location: ./login"); 
@@ -117,7 +112,7 @@ final class LoginController extends Controller {
         if ($updateResult) {
             $userModel->updateRecoveryToken($user['userId'], null, null);
             echo "Senha redefinida com Sucesso";
-            echo "<a href='./login'>Ir para Login</a>";
+            echo "<br><a href='./login'>Ir para Login</a>";
             exit();
         }
         

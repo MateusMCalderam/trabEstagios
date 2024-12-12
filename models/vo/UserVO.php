@@ -11,7 +11,7 @@ final class UserVO extends VO
     private $idProfessor;
     private $idEmpresa;
     
-    public function __construct($id = 0, $login = "", $senha = "", $nivel = "", $idEmpresa = "", $idEstudante = "", $idProfessor = ""){
+    public function __construct($id = 0, $login = "", $senha = "", $nivel = "", $idEmpresa = NULL, $idEstudante = NULL, $idProfessor = NULL){
         parent::__construct($id);
         $this->login = $login;
         $this->senha = $senha;

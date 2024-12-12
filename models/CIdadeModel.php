@@ -8,7 +8,7 @@ final class CidadeModel extends Model {
 
     public function selectAll($vo) {
         $db = new Database();
-        $query = "SELECT * FROM cidade";
+        $query = "SELECT * FROM cidade WHERE isVisible = 1";
         $data = $db->select($query);
 
         $arrayDados = [];
@@ -27,7 +27,7 @@ final class CidadeModel extends Model {
 
     public function selectOne($vo) {
         $db = new Database();
-        $query = "SELECT * FROM cidade WHERE id = :id";
+        $query = "SELECT * FROM cidade WHERE id = :id and isVisible = 1";
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
@@ -40,8 +40,8 @@ final class CidadeModel extends Model {
 
     public function insert($vo) {
         $db = new Database();
-        $query = "INSERT INTO cidade (nome, cep) 
-                  VALUES (:nome, :cep)";
+        $query = "INSERT INTO cidade (nome, cep, isVisible) 
+                  VALUES (:nome, :cep, 1)";
         $binds = [
             ":nome" => $vo->getNome(),
             ":cep" => $vo->getCep(),
@@ -53,7 +53,7 @@ final class CidadeModel extends Model {
     public function update($vo) {
         $db = new Database();
         $query = "UPDATE cidade 
-                  SET nome = :nome, cep = :cep WHERE id = :id";
+                  SET nome = :nome, cep = :cep, isVisible = 1 WHERE id = :id";
         $binds = [
             ":nome" => $vo->getNome(),
             ":cep" => $vo->getCep(),
@@ -65,7 +65,8 @@ final class CidadeModel extends Model {
 
     public function delete($vo) {
         $db = new Database();
-        $query = "DELETE FROM cidade WHERE id = :id";
+        $query = "UPDATE cidade 
+                  SET isVisible = 0 WHERE id = :id";
         $binds = [":id" => $vo->getId()];
 
         return $db->execute($query, $binds);

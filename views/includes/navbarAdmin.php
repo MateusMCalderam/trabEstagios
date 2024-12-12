@@ -11,6 +11,9 @@
             <a href="/trabEstagios/cursos">Cursos</a>
         </li>
         <li>
+            <a href="/trabEstagios/cidades">Cidades</a>
+        </li>
+        <li>
             <a href="/trabEstagios/empresas">Empresas</a>
         </li>
         <li>
