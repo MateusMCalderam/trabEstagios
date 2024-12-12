@@ -12,7 +12,9 @@
     <div class="body">
     <h2>Lista de Professores</h2>
     <a href="./professores/form" class="cadastrar">Cadastrar Professor</a>
-    <table border="1">
+
+    <div class="table">
+<table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -38,6 +40,10 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    </div>
+
+        
     </div>
     
 </body>

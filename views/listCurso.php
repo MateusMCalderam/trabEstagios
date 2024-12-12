@@ -12,7 +12,8 @@
     <div class="body">
     <h2>Lista de Cursos</h2>
     <a href="./cursos/form" class="cadastrar">Cadastrar Curso</a>
-    <table border="1">
+    <div class="table">
+        <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -38,6 +39,10 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    </div>
+
+    
     </div>
 </body>
 </html>

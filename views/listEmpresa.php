@@ -12,7 +12,9 @@
     <div class="body">
     <h2>Lista de Empresas</h2>
     <a href="./empresas/form" class="cadastrar">Cadastrar Empresa</a>
-    <table border="1">
+    
+    <div class="table">
+        <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -52,6 +54,9 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
+    
+    
     </div>
     
 </body>
