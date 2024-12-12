@@ -26,13 +26,20 @@ final class LoginController extends Controller {
 
         $model = new UserModel();
         $result = $model->doLogin($vo);
+
+        print_r($result->getNivel());
     
         if (empty($result)) {
             header("Location: ./login"); 
             exit();
         } else {
-            header("Location: ./usuarios"); 
-            exit();
+            if ($result->getNivel() > 1) {
+                header("Location: ./estagios"); 
+                exit();
+            } else {
+                header("Location: ./estagiosSecao"); 
+                exit();
+            }
         }
     }
     

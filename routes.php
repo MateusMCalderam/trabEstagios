@@ -45,9 +45,11 @@ return [
     ['POST', '/processarNovaSenha', 'LoginController@processarNovaSenha'],
 
     // Estágios (Protegido por middleware)
-    ['GET', '/admin/estagios', 'EstagioController@listSecao', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estagiosSecao', 'EstagioController@listSecao', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/estagios', 'EstagioController@list', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 2]]],
     ['GET', '/estagios/form', 'EstagioController@form', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['POST', '/estagios/save', 'EstagioController@save', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
     ['GET', '/estagios/remove', 'EstagioController@remove', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/estagios/salvar', 'EstagioController@salvar', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
+    ['GET', '/mudaSectionEstagio', 'EstagioController@mudaSectionEstagio', ['Middleware\AuthMiddleware', ["Middleware\NivelMiddleware", 1]]],
 ];

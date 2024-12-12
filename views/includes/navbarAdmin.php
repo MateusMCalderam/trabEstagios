@@ -5,22 +5,25 @@
             <a href="../listCadastros.php">Cadastros</a>
         </li> -->
         <li>
-            <a href="./cursos">Cursos</a>
+            <a href="/trabEstagios/estagiosSecao">Estágios</a>
         </li>
         <li>
-            <a href="./empresas">Empresas</a>
+            <a href="/trabEstagios/cursos">Cursos</a>
         </li>
         <li>
-            <a href="./estudantes">Estudantes</a>
+            <a href="/trabEstagios/empresas">Empresas</a>
         </li>
         <li>
-            <a href="./professores">Professores</a>
+            <a href="/trabEstagios/estudantes">Estudantes</a>
         </li>
         <li>
-            <a href="./usuarios">Usuários</a>
+            <a href="/trabEstagios/professores">Professores</a>
         </li>
         <li>
-            <a href="./logout">Sair</a>
+            <a href="/trabEstagios/usuarios">Usuários</a>
+        </li>
+        <li>
+            <a href="/trabEstagios/logout">Sair</a>
         </li>
     </ul>
 </header>

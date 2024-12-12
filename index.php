@@ -34,8 +34,6 @@ if (strpos($uri, $basePath) === 0) {
 }
 
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
-
-
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         http_response_code(404);
@@ -60,21 +58,18 @@ switch ($routeInfo[0]) {
 
         foreach ($middlewares as $middleware) {
             if (is_array($middleware)) {
-                $middlewareName = $middleware[0];  // O nome do middleware
+                $middlewareName = $middleware[0]; 
                 $params = isset($middleware[1]) ? (array) $middleware[1] : []; 
             } else {
                 $middlewareName = $middleware;
                 $params = [];
             }
         
-            // Verifique se a classe do middleware existe, incluindo o namespace completo
             if (class_exists($middlewareName)) {
-                $middlewareInstance = new $middlewareName(...$params); // Passa os parâmetros para o construtor do middleware
+                $middlewareInstance = new $middlewareName(...$params); 
         
                 if (method_exists($middlewareInstance, 'handle')) {
-                    // Passe o objeto de requisição para o middleware e execute o próximo passo
                     $middlewareInstance->handle(function() {
-                        // Este é o ponto onde a execução passaria para o próximo middleware ou controlador
                     });
                 } else {
                     echo "O método 'handle' não foi encontrado no middleware {$middlewareName}.";
@@ -91,7 +86,6 @@ switch ($routeInfo[0]) {
         $controllerClass = "Controller\\{$controller}";
         $controllerFile = "./controllers/{$controller}.php";
 
-        // Carrega e executa o controller
         if (file_exists($controllerFile)) {
             require_once $controllerFile;
             if (class_exists($controllerClass)) {

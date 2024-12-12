@@ -4,30 +4,39 @@ namespace Model\VO;
 
 final class EstagioVO extends VO {
 
-    private $periodo;
+    //Dados Gerais 
     private $area;
+    private $idCidade;
+    private $status; 
+    private $tipoProcesso;
+    
+    // Carga Horário e Período 
     private $cargaHoraria;
+    private $periodo;
+    
+    // Atores
     private $idEstudante;
     private $idOrientador;
     private $idEmpresa;
-    private $representante;
-    private $idCidade;
     private $idCoorientador;
+    
+    //Representante 
+    private $representante;
     private $nomeSupervisor;
     private $cargoSupervisor;
     private $telefoneSupervisor;
     private $emailSupervisor;
-    private $tipoProcesso;
-    private $encaminhamentos;
+
+    //Documentos 
     private $planoAtividades;
     private $relatorioFinal;
     private $autoavaliacaoEmpresa;
     private $autoavaliacao;
     private $termoCompromisso;
 
-    public function __construct($id = 0, $periodo = "", $area = "", $cargaHoraria = '',$idEstudante = 0 , $idOrientador = 0 , 
-    $idEmpresa = '' , $representante = '' , $idCidade = '', $idCoorientador = '', $nomeSupervisor = '', $cargoSupervisor = '', 
-    $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $encaminhamentos = '', $planoAtividades = '', $relatorioFinal = '', 
+    public function __construct($id = 0, $periodo = 0, $area = "", $cargaHoraria = 0,$idEstudante = 0 , $idOrientador = 0 , 
+    $idEmpresa = 0 , $representante = '' , $idCidade = 0, $idCoorientador = 0, $nomeSupervisor = '', $cargoSupervisor = '', 
+    $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $status = '', $planoAtividades = '', $relatorioFinal = '', 
     $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '') {
         parent::__construct($id);
         $this->periodo = $periodo;
@@ -44,7 +53,7 @@ final class EstagioVO extends VO {
         $this->telefoneSupervisor = $telefoneSupervisor;
         $this->emailSupervisor = $emailSupervisor;
         $this->tipoProcesso = $tipoProcesso;
-        $this->encaminhamentos = $encaminhamentos;
+        $this->status = $status;
         $this->planoAtividades = $planoAtividades;
         $this->relatorioFinal = $relatorioFinal;
         $this->autoavaliacaoEmpresa = $autoavaliacaoEmpresa;
@@ -149,11 +158,11 @@ final class EstagioVO extends VO {
     public function getTipoProcesso() {
         return $this->tipoProcesso;
     }
-    public function setEncaminhamentos($encaminhamentos) {
-        $this->encaminhamentos = $encaminhamentos;
+    public function setStatus($status) {
+        $this->status = $status;
     }
-    public function getEncaminhamentos() {
-        return $this->encaminhamentos;
+    public function getStatus() {
+        return $this->status;
     }
     public function setPlanoAtividades($planoAtividades) {
         $this->planoAtividades = $planoAtividades;

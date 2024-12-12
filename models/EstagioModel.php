@@ -17,7 +17,7 @@ final class EstagioModel extends Model {
             $vo = new EstagioVO($row["id"], $row["periodo"], $row["area"], $row["cargaHoraria"], $row["idEstudante"], 
             $row["idOrientador"], $row["idEmpresa"], $row["representante"], $row["idCidade"], $row["idCoorientador"], 
             $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"], 
-            $row["tipoProcesso"], $row["encaminhamentos"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"], 
+            $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"], 
             $row["autoavaliacao"], $row["termoCompromisso"]);
             array_push($arrayDados, $vo);
         }
@@ -33,20 +33,21 @@ final class EstagioModel extends Model {
 
         return new EstagioVO($data[0]["id"], $data[0]["periodo"], $data[0]["area"], $data[0]["cargaHoraria"], 
         $data[0]["idEstudante"], $data[0]["idOrientador"], $data[0]["idEmpresa"], $data[0]["representante"], $data[0]["idCidade"], 
-        $row["idCoorientador"], $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], 
-        $row["emailSupervisor"], $row["tipoProcesso"], $row["encaminhamentos"], $row["planoAtividades"], 
-        $row["relatorioFinal"], $row["autoavaliacaoEmpresa"], $row["autoavaliacao"], $row["termoCompromisso"]);
+        $data[0]["idCoorientador"], $data[0]["nomeSupervisor"], $data[0]["cargoSupervisor"], $data[0]["telefoneSupervisor"], 
+        $data[0]["emailSupervisor"], $data[0]["tipoProcesso"], $data[0]["status"], $data[0]["planoAtividades"], 
+        $data[0]["relatorioFinal"], $data[0]["autoavaliacaoEmpresa"], $data[0]["autoavaliacao"], $data[0]["termoCompromisso"]);
     }
 
     public function insert($vo) {
         $db = new Database();
 
-        $query = "INSERT INTO estagio (periodo, area, cargaHoraria, idEstudante, rg, idEmpresa, representante, 
+        $query = "INSERT INTO estagio (periodo, area, cargaHoraria, idEstudante, idOrientador, idEmpresa, representante, 
         idCidade, idCoorientador, nomeSupervisor, cargoSupervisor, telefoneSupervisor, emailSupervisor, tipoProcesso, 
-        encaminhamentos, planoAtividades, relatorioFinal, autoavaliacaoEmpresa, autoavaliacao, termoCompromisso) VALUES 
+        status, planoAtividades, relatorioFinal, autoavaliacaoEmpresa, autoavaliacao, termoCompromisso) VALUES 
         (:periodo, :area, :cargaHoraria, :idEstudante, :idOrientador, :idEmpresa, :representante, :idCidade, 
         :idCoorientador, :nomeSupervisor, :cargoSupervisor, :telefoneSupervisor, :emailSupervisor, :tipoProcesso, 
-        :encaminhamentos, :planoAtividades, :relatorioFinal, :autoavaliacaoEmpresa, :autoavaliacao, :termoCompromisso)";
+        :status, :planoAtividades, :relatorioFinal, :autoavaliacaoEmpresa, :autoavaliacao, :termoCompromisso)";
+
         $binds = [
             ":periodo" => $vo->getPeriodo(),
             ":area" => $vo->getArea(),
@@ -62,16 +63,16 @@ final class EstagioModel extends Model {
             ":telefoneSupervisor" => $vo->getTelefoneSupervisor(),
             ":emailSupervisor" => $vo->getEmailSupervisor(),
             ":tipoProcesso" => $vo->getTipoProcesso(),
-            ":encaminhamentos" => $vo->getEncaminhamentos(),
+            ":status" => $vo->getStatus(),
             ":planoAtividades" => $vo->getPlanoAtividades(),
             ":relatorioFinal" => $vo->getRelatorioFinal(),
             ":autoavaliacaoEmpresa" => $vo->getAutoavaliacaoEmpresa(),
             ":autoavaliacao" => $vo->getAutoavaliacao(),
             ":termoCompromisso" => $vo->getTermoCompromisso(),
         ];
-    
-
+        
         return $db->execute($query, $binds);
+
     }
 
     public function update($vo) {
@@ -81,8 +82,10 @@ final class EstagioModel extends Model {
         idEmpresa = :idEmpresa, representante = :representante, idCidade = :idCidade, 
         idCoorientador = :idCoorientador, nomeSupervisor = :nomeSupervisor, cargoSupervisor = :cargoSupervisor, 
         telefoneSupervisor = :telefoneSupervisor, emailSupervisor = :emailSupervisor, 
-        tipoProcesso = :tipoProcesso, encaminhamentos = :encaminhamentos, planoAtividades = :planoAtividades, 
-        relatorioFinal = :relatorioFinal, autoavaliacaoEmpresa = :autoavaliacaoEmpresa, autoavaliacao = :autoavaliacao, termoCompromisso = :termoCompromisso  WHERE id = :id";
+        tipoProcesso = :tipoProcesso, status = :status, planoAtividades = :planoAtividades, 
+        relatorioFinal = :relatorioFinal, autoavaliacaoEmpresa = :autoavaliacaoEmpresa, autoavaliacao = :autoavaliacao, 
+        termoCompromisso = :termoCompromisso WHERE id = :id";
+
         $binds = [
             ":periodo" => $vo->getPeriodo(),
             ":area" => $vo->getArea(),
@@ -98,7 +101,7 @@ final class EstagioModel extends Model {
             ":telefoneSupervisor" => $vo->getTelefoneSupervisor(),
             ":emailSupervisor" => $vo->getEmailSupervisor(),
             ":tipoProcesso" => $vo->getTipoProcesso(),
-            ":encaminhamentos" => $vo->getEncaminhamentos(),
+            ":status" => $vo->getStatus(),
             ":planoAtividades" => $vo->getPlanoAtividades(),
             ":relatorioFinal" => $vo->getRelatorioFinal(),
             ":autoavaliacaoEmpresa" => $vo->getAutoavaliacaoEmpresa(),
@@ -106,8 +109,10 @@ final class EstagioModel extends Model {
             ":termoCompromisso" => $vo->getTermoCompromisso(),
             ":id" => $vo->getId()
         ];
-        
 
+        
+        print_r($binds);
+        
         return $db->execute($query, $binds);
     }
 
@@ -115,10 +120,7 @@ final class EstagioModel extends Model {
         $db = new Database();
         $query = "DELETE FROM estagio WHERE id = :id";
         $binds = [":id" => $vo->getId()];
-
+        
         return $db->execute($query, $binds);
     }
-
-
-
 }
