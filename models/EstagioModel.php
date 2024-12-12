@@ -16,7 +16,7 @@ final class EstagioModel extends Model
         $arrayDados = [];
 
         foreach ($data as $row) {
-            $vo = new EstagioVO($row["id"], $row["periodo"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
+            $vo = new EstagioVO($row["id"], $row["dataInicio"], $row["dataFinal"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
                 $row["idOrientador"], $row["idEmpresa"], $row["representante"], $row["idCidade"], $row["idCoorientador"],
                 $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"],
                 $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"],
@@ -47,7 +47,7 @@ final class EstagioModel extends Model
 
         $arrayDados = [];
         foreach ($data as $row) {
-            $vo = new EstagioVO($row["id"], $row["periodo"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
+            $vo = new EstagioVO($row["id"], $row["dataInicio"], $row["dataFinal"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
                 $row["idOrientador"], $row["idEmpresa"], $row["representante"], $row["idCidade"], $row["idCoorientador"],
                 $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"],
                 $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"],
@@ -80,7 +80,7 @@ final class EstagioModel extends Model
 
         $arrayDados = [];
         foreach ($data as $row) {
-            $vo = new EstagioVO($row["id"], $row["periodo"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
+            $vo = new EstagioVO($row["id"], $row["dataInicio"], $row["dataFinal"], $row["area"], $row["cargaHoraria"], $row["idEstudante"],
                 $row["idOrientador"], $row["idEmpresa"], $row["representante"], $row["idCidade"], $row["idCoorientador"],
                 $row["nomeSupervisor"], $row["cargoSupervisor"], $row["telefoneSupervisor"], $row["emailSupervisor"],
                 $row["tipoProcesso"], $row["status"], $row["planoAtividades"], $row["relatorioFinal"], $row["autoavaliacaoEmpresa"],
@@ -99,7 +99,7 @@ final class EstagioModel extends Model
         $binds = [":id" => $vo->getId()];
         $data = $db->select($query, $binds);
 
-        return new EstagioVO($data[0]["id"], $data[0]["periodo"], $data[0]["area"], $data[0]["cargaHoraria"],
+        return new EstagioVO($data[0]["id"], $data[0]["dataInicio"], $data[0]["dataFinal"], $data[0]["area"], $data[0]["cargaHoraria"],
             $data[0]["idEstudante"], $data[0]["idOrientador"], $data[0]["idEmpresa"], $data[0]["representante"], $data[0]["idCidade"],
             $data[0]["idCoorientador"], $data[0]["nomeSupervisor"], $data[0]["cargoSupervisor"], $data[0]["telefoneSupervisor"],
             $data[0]["emailSupervisor"], $data[0]["tipoProcesso"], $data[0]["status"], $data[0]["planoAtividades"],
@@ -110,15 +110,16 @@ final class EstagioModel extends Model
     {
         $db = new Database();
 
-        $query = "INSERT INTO estagio (periodo, area, cargaHoraria, idEstudante, idOrientador, idEmpresa, representante,
+        $query = "INSERT INTO estagio (dataInicio, dataFinal, area, cargaHoraria, idEstudante, idOrientador, idEmpresa, representante,
         idCidade, idCoorientador, nomeSupervisor, cargoSupervisor, telefoneSupervisor, emailSupervisor, tipoProcesso,
         status, planoAtividades, relatorioFinal, autoavaliacaoEmpresa, autoavaliacao, termoCompromisso) VALUES
-        (:periodo, :area, :cargaHoraria, :idEstudante, :idOrientador, :idEmpresa, :representante, :idCidade,
+        (:dataInicio, :dataFinal, :area, :cargaHoraria, :idEstudante, :idOrientador, :idEmpresa, :representante, :idCidade,
         :idCoorientador, :nomeSupervisor, :cargoSupervisor, :telefoneSupervisor, :emailSupervisor, :tipoProcesso,
         :status, :planoAtividades, :relatorioFinal, :autoavaliacaoEmpresa, :autoavaliacao, :termoCompromisso)";
 
         $binds = [
-            ":periodo" => $vo->getPeriodo(),
+            ":dataInicio" => $vo->getDataInicio(),
+            ":dataFinal" => $vo->getDataFinal(),
             ":area" => $vo->getArea(),
             ":cargaHoraria" => $vo->getCargaHoraria(),
             ":idEstudante" => $vo->getIdEstudante(),
@@ -148,7 +149,7 @@ final class EstagioModel extends Model
     {
         $db = new Database();
 
-        $query = "UPDATE estagio SET periodo = :periodo, area = :area, cargaHoraria = :cargaHoraria, idEstudante = :idEstudante, idOrientador = :idOrientador,
+        $query = "UPDATE estagio SET dataInicio = :dataInicio, dataFinal = :dataFinal, area = :area, cargaHoraria = :cargaHoraria, idEstudante = :idEstudante, idOrientador = :idOrientador,
         idEmpresa = :idEmpresa, representante = :representante, idCidade = :idCidade,
         idCoorientador = :idCoorientador, nomeSupervisor = :nomeSupervisor, cargoSupervisor = :cargoSupervisor,
         telefoneSupervisor = :telefoneSupervisor, emailSupervisor = :emailSupervisor,
@@ -157,7 +158,8 @@ final class EstagioModel extends Model
         termoCompromisso = :termoCompromisso WHERE id = :id";
 
         $binds = [
-            ":periodo" => $vo->getPeriodo(),
+            ":dataInicio" => $vo->getDataInicio(),
+            ":dataFinal" => $vo->getDataFinal(),
             ":area" => $vo->getArea(),
             ":cargaHoraria" => $vo->getCargaHoraria(),
             ":idEstudante" => $vo->getIdEstudante(),

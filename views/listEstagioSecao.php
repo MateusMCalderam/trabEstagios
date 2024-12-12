@@ -44,7 +44,13 @@
                     <?php foreach ($estagios as $estagio): ?>
                         <tr>
                             <td><?php echo $estagio->getId(); ?></td>
-                            <td><?php echo $estagio->getPeriodo(); ?></td>
+                            <td>
+                                <?php 
+                                $dataInicio = new DateTime($estagio->getDataInicio());
+                                $dataFinal = new DateTime($estagio->getDataFinal());
+                                echo $dataInicio->format('d/m/Y') . ' - ' . $dataFinal->format('d/m/Y'); 
+                                ?>
+                            </td>
                             <td><?php echo $estagio->getArea(); ?></td>
                             <td><?php echo $estagio->getCargaHoraria(); ?></td>
                             <td><?php echo $estagio->getNomeEstudante(); ?></td>

@@ -12,7 +12,8 @@ final class EstagioVO extends VO {
     
     // Carga Horário e Período 
     private $cargaHoraria;
-    private $periodo;
+    private $dataInicio;
+    private $dataFinal;
     
     // Atores
     private $idEstudante;
@@ -40,12 +41,13 @@ final class EstagioVO extends VO {
     private $nomeEmpresa;
     private $nomeCoorientador;
     
-    public function __construct($id = 0, $periodo = 0, $area = "", $cargaHoraria = 0,$idEstudante = 0 , $idOrientador = 0 , 
+    public function __construct($id = 0, $dataInicio = '0000-00-00', $dataFinal = '0000-00-00', $area = "", $cargaHoraria = 0,$idEstudante = 0 , $idOrientador = 0 , 
     $idEmpresa = 0 , $representante = '' , $idCidade = 0, $idCoorientador = 0, $nomeSupervisor = '', $cargoSupervisor = '', 
     $telefoneSupervisor = '', $emailSupervisor = '', $tipoProcesso = '', $status = '', $planoAtividades = '', $relatorioFinal = '', 
     $autoavaliacaoEmpresa = '', $autoavaliacao = '', $termoCompromisso = '', $nomeCidade = "", $nomeEstudante = "", $nomeOrientador = "", $nomeEmpresa = "", $nomeCoorientador = "") {
         parent::__construct($id);
-        $this->periodo = $periodo;
+        $this->dataInicio = $dataInicio;
+        $this->dataFinal = $dataFinal;
         $this->area = $area;
         $this->cargaHoraria = $cargaHoraria;
         $this->idEstudante = $idEstudante;
@@ -73,12 +75,20 @@ final class EstagioVO extends VO {
         $this->nomeCoorientador = $nomeCoorientador;
     }
 
-    public function getPeriodo() {
-        return $this->periodo;
+    public function getDataInicio() {
+        return $this->dataInicio;
     }
 
-    public function setPeriodo($periodo) {
-        $this->periodo = $periodo;
+    public function setDataInicio($dataInicio) {
+        $this->dataInicio = $dataInicio;
+    }
+
+    public function getDataFinal() {
+        return $this->dataFinal;
+    }
+
+    public function setDataFinal($dataFinal) {
+        $this->dataFinal = $dataFinal;
     }
 
     public function getArea() {

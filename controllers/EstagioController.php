@@ -190,7 +190,8 @@ class EstagioController extends Controller {
     
             case 'periodo':
                 $vo->setCargaHoraria($_POST['cargaHoraria'] ?? 0);
-                $vo->setPeriodo($_POST['periodo'] ?? "");
+                $vo->setDataInicio($_POST['dataInicio'] ?? "0000-00-00");
+                $vo->setDataFinal($_POST['dataFinal'] ?? "0000-00-00");
                 break;
     
             case 'atores':

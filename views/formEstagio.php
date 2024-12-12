@@ -118,8 +118,20 @@ $section = $_SESSION['sectionAtual'] ?? 'dados-gerais';
             <h2>Carga Horária e Período</h2>
             <form method="POST" action="./save">
                 <label>Carga Horária: <input type="text" name="cargaHoraria" value="<?= $estagio->getCargaHoraria() ?>"></label>
-                <label>Período: <input type="text" name="periodo" value="<?= $estagio->getPeriodo() ?>"></label>
-                <button type="submit">Salvar</button>
+
+                    <input 
+                        type="date" 
+                        name="dataInicio" 
+                        value="<?php echo htmlspecialchars($estagio->getDataInicio(), ENT_QUOTES, 'UTF-8'); ?>" 
+                        required 
+                    />
+                    <input 
+                        type="date" 
+                        name="dataFinal" 
+                        value="<?php echo htmlspecialchars($estagio->getDataFinal(), ENT_QUOTES, 'UTF-8'); ?>" 
+                        required 
+                    />
+                    <button type="submit">Salvar</button>
             </form>
         <?php elseif ($section == 'atores'): ?>
             <h2>Atores</h2>
