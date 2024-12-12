@@ -12,7 +12,9 @@
     <div class="body">
     <h2>Lista de Usuários</h2>
     <a href="./usuarios/form" class="cadastrar">Cadastrar Usuário</a>
-    <table border="1">
+    
+    <div class="table">
+        <table border="1">
         <thead>
             <tr>
                 <th>ID</th>
@@ -42,6 +44,10 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+
+    </div>
+
+    
     </div>
     
 </body>
